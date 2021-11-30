@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class ProductSeeder extends Seeder
 {
@@ -16,7 +17,7 @@ class ProductSeeder extends Seeder
             'deskripsi' => 'Ini laptop gaming',
             'stok' => 20,
             'harga' => 15000000,
-            'tahun_rilis' => '2019',
+            'tahun_rilis' => '2021',
             'foto'=> "",
             'category_id' => 1,
             'brand_id' => 1,
@@ -27,7 +28,7 @@ class ProductSeeder extends Seeder
             'deskripsi' => 'Ini laptop kerja',
             'stok' => 30,
             'harga' => 5000000,
-            'tahun_rilis' => '2013',
+            'tahun_rilis' => '2021',
             'foto'=> "",
             'category_id' => 2,
             'brand_id' => 2,
