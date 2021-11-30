@@ -13,6 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::resource('products', 'ProductController');
+
+Route::resource('categories', 'CategoryController');
+
+Route::resource('transactions', 'TransactionController');
+
+Route::resource('brands', 'BrandController');
+
+Route::get('/', 'ProductController@front_index');
