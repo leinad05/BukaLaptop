@@ -1,6 +1,6 @@
 @extends('layouts.argon')
 @section('judul_halaman')
-    Products
+    Detail Product
 @endsection
 @section('tempat_konten')
     <div class="row">
@@ -24,8 +24,12 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>Data</th>
-                                <th>Value</th>
+                                <th>
+                                    <h4>Data</h4>
+                                </th>
+                                <th>
+                                    <h4>Value</h4>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -49,42 +53,14 @@
                                 <td>Description</td>
                                 <td>{{ $product->deskripsi }}</td>
                             </tr>
-                            <tr>
-                                <td>Size</td>
-                                <td>{{ $product->deskripsi }}</td>
-                            </tr>
-                            <tr>
-                                <td>Resolution</td>
-                                <td>{{ $product->deskripsi }}</td>
-                            </tr>
-                            <tr>
-                                <td>RAM</td>
-                                <td>{{ $product->deskripsi }}</td>
-                            </tr>
-                            <tr>
-                                <td>Processor</td>
-                                <td>{{ $product->deskripsi }}</td>
-                            </tr>
-                            <tr>
-                                <td>OS</td>
-                                <td>{{ $product->deskripsi }}</td>
-                            </tr>
-                            <tr>
-                                <td>VGA Card</td>
-                                <td>{{ $product->deskripsi }}</td>
-                            </tr>
-                            <tr>
-                                <td>Storage</td>
-                                <td>{{ $product->deskripsi }}</td>
-                            </tr>
-                            <tr>
-                                <td>Weight</td>
-                                <td>{{ $product->deskripsi }}</td>
-                            </tr>
-                            <tr>
-                                <td>Battery</td>
-                                <td>{{ $product->deskripsi }}</td>
-                            </tr>
+
+                            @foreach ($product->specifications as $s)
+                                <tr>
+                                    <td>{{ $s->nama }}</td>
+                                    <td>{{ $s->pivot->keterangan }}</td>
+                                </tr>
+                            @endforeach
+                            
                             <tr>
                                 <td>Price</td>
                                 <td>{{ $product->harga }}</td>
