@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
+
 Route::resource('products', 'ProductController');
 
 Route::resource('categories', 'CategoryController');
@@ -24,5 +25,10 @@ Route::resource('categories', 'CategoryController');
 Route::resource('transactions', 'TransactionController');
 
 Route::resource('brands', 'BrandController');
+Route::middleware(['auth'])->group(function () {
+});
 
 Route::get('/', 'ProductController@front_index');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
