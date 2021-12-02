@@ -83,4 +83,13 @@ class TransactionController extends Controller
     {
         //
     }
+
+    public function showAjax(Request $request){
+        $id = ($request->get('id'));
+        $data = Transaction::find($id);
+        $products = $data->products;
+        return response()->json(array(
+            'msg'=>view('transaction.showmodal', compact('data'))->render()
+        ),200);
+    }
 }

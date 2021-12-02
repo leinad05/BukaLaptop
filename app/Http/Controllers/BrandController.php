@@ -36,7 +36,10 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $new_brand = new Brand();
+        $new_brand->nama_brand = $request->name;
+        $new_brand->save();
+        return redirect('brands')->with('status_sukses', 'Successfully add brand data');
     }
 
     /**
@@ -83,4 +86,46 @@ class BrandController extends Controller
     {
         //
     }
+
+    public function getDataFirst(Request $request){
+        $id = $request->id_brand;
+        $brand = Brand::find($id);
+        return response()->json(array(
+            'status' => 'oke',
+            'msg'=>view('brand.editformmodal', compact('brand'))->render()
+        ),200);
+    }
+
+    public function simpan_edit_brand(Request $request){
+        $id = $request->id_brand;
+        $name = $request->name;
+
+        $brand = Brand::find($id);
+        $brand->nama_brand = $name;
+        $brand->save();
+
+        return response()->json(array(
+            'status' => 'oke',
+            'msg'=> 'Successfully edit brand data'
+        ),200);
+    }
+
+    public function delete_data_brand_ajax(Request $request){
+        $brand = Brand::find($request->id_brand);
+        try {
+            $brand->delete();
+            return response()->json(array(
+                'status' => 'oke',
+                'msg'=> 'Successfully delete brand data'
+            ),200);
+        } catch (\PDOException $e) {
+            $msg = "Failed to delete data";
+
+            return response()->json(array(
+                'status' => 'error',
+                'msg'=> $msg
+            ),200);
+        }
+    }
+
 }

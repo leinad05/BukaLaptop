@@ -10,12 +10,8 @@
                 <!-- Card header -->
                 <div class="card-header border-0">
                     <div class="row">
-                        <div class="col-8">
+                        <div class="col-12">
                             <h3 class="mb-0">Master Transaction</h3>
-                        </div>
-                        <div class="col-4 text-right">
-                            <a href="#" class="btn btn-sm btn-neutral">New</a>
-                            <a href="#" class="btn btn-sm btn-neutral">Filters</a>
                         </div>
                     </div>
                 </div>
@@ -32,22 +28,22 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($data as $b)
-                                <tr id="tr_{{ $b->id }}">
-                                    <td class="text-center">{{ $b->id }}</td>
-                                    <td class="editable text-center" id="data_customer_{{ $b->id }}">
-                                        {{ $b->user->name }}</td>
-                                    <td class="editable text-center" id="data_date_{{ $b->id }}">
-                                      {{ $b->tanggal_transaksi }}</td>
-                                    <td class="editable text-center" id="data_total_{{ $b->id }}">
-                                      {{ $b->total }}</td>    
+                            @foreach ($data as $t)
+                                <tr id="tr_{{ $t->id }}">
+                                    <td class="text-center">{{ $t->id }}</td>
+                                    <td class="editable text-center" id="data_customer_{{ $t->id }}">
+                                        {{ $t->user->name }}</td>
+                                    <td class="editable text-center" id="data_date_{{ $t->id }}">
+                                        {{ $t->tanggal_transaksi }}</td>
+                                    <td class="editable text-center" id="data_total_{{ $t->id }}">
+                                        {{ $t->total }}</td>
                                     <td class="text-right">
-                                        <a href="#modal_edit_supplier" class="btn btn-sm btn-warning" data-toggle="modal"
-                                            onclick="">Ubah w/Modal-Ajax</a>
-                                        {{-- @can('delete-permission', $b) --}}
-                                        <button type="button" class="btn btn-sm btn-danger" onclick="">Delete
-                                            w/Modal-Ajax</button>
+                                        <a href="#" class="btn btn-sm btn-warning" data-toggle="modal" onclick="">Ubah</a>
+                                        {{-- @can('delete-permission', $t) --}}
+                                        <button type="button" class="btn btn-sm btn-danger" onclick="">Delete</button>
                                         {{-- @endcan --}}
+                                        <a href="#" data-target="#basic" class="btn btn-sm btn-primary" data-toggle="modal"
+                                            onclick="getDetailData({{ $t->id }})">Show Detail</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -61,9 +57,46 @@
 
         </div>
     </div>
+
+    {{-- ini popup utk btn show /ajax --}}
+    <div class="modal fade" id="basic" tabindex="-1" role="basic" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Transaction Detail</h4>
+                </div>
+                <div class="modal-body" id="msg">
+                    Modal body goes here
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    {{-- <button type="button" class="btn btn-info">Save changes</button> --}}
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    {{-- end ini popup utk btn show /ajax --}}
+
 @endsection
 @section('headerjs')
-
+    <script>
+        function getDetailData(id) {
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('transaction.showAjax') }}',
+                data: '_token= <?php echo csrf_token(); ?>&id=' + id,
+                success: function(data) {
+                    $("#msg").html(data.msg);
+                },
+                error: function(xhr) {
+                    console.log(xhr);
+                }
+            });
+        }
+    </script>
 @endsection
 @section('footerjs')
     <script>

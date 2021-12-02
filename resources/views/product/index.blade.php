@@ -14,8 +14,8 @@
                     <h3 class="mb-0">Master Product</h3>
                 </div>
                 <div class="col-4 text-right">
-                    <a href="#" class="btn btn-sm btn-neutral">New</a>
-                    <a href="#" class="btn btn-sm btn-neutral">Filters</a>
+                    <a href="{{ route('products.create') }}" class="btn btn-neutral btn-sm"><i class="fa fa-plus"></i>
+                      Add Product</a>
                 </div>
             </div>
         </div>

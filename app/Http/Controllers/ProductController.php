@@ -29,7 +29,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        $brands = Brand::all();
+        return view('product.addproduct', compact('categories','brands'));
     }
 
     /**
@@ -40,7 +42,18 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $new_product = new Product();
+        $new_product->nama = $request->name;
+        $new_product->harga = $request->harga;
+        $new_product->deskripsi = $request->description;
+        $new_product->stok = $request->stock;
+        $new_product->tahun_rilis = $request->releaseyear;
+        $new_product->category_id = $request->category_id;
+        $new_product->brand_id = $request->brand_id;
+        // $new_product->foto = $request->image;
+        $new_product->foto = 11;
+        $new_product->save();
+        return redirect('products')->with('status_sukses', 'Successfully add product data');
     }
 
     /**
