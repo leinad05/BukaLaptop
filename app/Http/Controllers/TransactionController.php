@@ -79,9 +79,11 @@ class TransactionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Transaction $transaction)
     {
-        //
+        //dd("masuk destroy", $transaction);
+        $transaction->delete();
+        return redirect()->route('transactions.index')->with('status','Successfully deleted');
     }
 
     public function showAjax(Request $request){

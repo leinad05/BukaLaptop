@@ -73,9 +73,12 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
         //
+        $categories = Category::all();
+        $brands = Brand::all();
+        return view('product.editproduct', compact('categories','brands','product'));
     }
 
     /**
@@ -88,6 +91,17 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $product = Product::find($id);
+        $product->nama = $request->get('name');
+        $product->harga = $request->get('harga');
+        $product->stok = $request->get('stock');
+        $product->category_id = $request->get('category_id');
+        $product->deskripsi = $request->get('description');
+        $product->tahun_rilis = $request->get('releaseyear');
+        $product->foto = "11";
+        $product->brand_id = $request->get('brand_id');
+        $product->save();
+        return redirect()->route('products.index')->with('status','Data Produk berhasil diubah');
     }
 
     /**
@@ -96,9 +110,22 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
         //
+        //$product->delete();
+        return redirect()->route('products.index')->with('status','Successfully deleted');
+    }
+
+    public function getEditFormOnly(Request $request)
+    {
+        $id = $request->get('id');
+        $product = Product::find($id);
+        $categories = Category::all();
+        $brands = Brand::all();
+        return response()->json(array(
+            'msg'=> view('product.editform',compact('product','brands','categories'))->render()
+        ),200);
     }
 
     public function front_index(){

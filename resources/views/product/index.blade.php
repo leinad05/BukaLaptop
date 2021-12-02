@@ -3,9 +3,31 @@
     Products
 @endsection
 @section('tempat_konten')
+{{-- ini popup utk btn show /ajax --}}
+<div class="modal fade" id="editModals" tabindex="-1" role="basic" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+              <h4 class="modal-title">Edit Product</h4>
+          </div>
+          
+              <div class="modal-body" id = "msgFormEdit">
+                  
+              </div>
+      </div>
+      <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+{{-- end ini popup utk btn show /ajax --}}
 <div class="row">
     <div class="col">
-
+      @if (session('status'))
+        <div class = "alert alert-success">
+            {{ session('status') }}
+        </div>
+      @endif
       <div class="card">
         <!-- Card header -->
         <div class="card-header border-0">
@@ -52,10 +74,14 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                               <a class="dropdown-item" href="{{ url('products/' . $p->id) }}">Detail</a>
-                              <a class="dropdown-item" href="#modal_edit_produk" data-toggle="modal"
-                              onclick="">Ubah w/Modal-Ajax</a>
+                              <a class="dropdown-item" data-toggle="modal" href="#editModals"
+                              onclick="getDataFirstEdit({{ $p->id }})">Edit</a>
                               {{-- @can('delete-permission', $p) --}}
-                              <a class="dropdown-item" href="#" onclick="">Delete w/Modal-Ajax</a>
+                              <form method = "POST" action = "{{ route('products.destroy', $p->id) }}">
+                                @method('DELETE')
+                                @csrf
+                                <button class="dropdown-item" href="#" onclick="if(!confirm('This transaction will be deleted. are you sure?')){return false;}" type = "submit">Delete</button>
+                              </form>
                               {{-- @endcan --}}
                             </div>
                           </div>
@@ -81,5 +107,16 @@
   $(document).ready(function() {
       $('#tabel-produk').DataTable();
   });
+
+  function getDataFirstEdit(id)
+  {
+    $.ajax({
+      type:'GET',
+      url:'{{ route("products.getEditFormOnly") }}',
+      data:'id='+id,
+      success:function(data){
+        $("#msgFormEdit").html(data.msg);
+    }});
+  }
 </script>
 @endsection

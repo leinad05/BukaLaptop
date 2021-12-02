@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 //halo
 
 Route::resource('products', 'ProductController');
+Route::get('product/getEditFormOnly/', 'ProductController@getEditFormOnly')->name('products.getEditFormOnly');
+//Route::get('product/getEditFormOnly', 'ProductController@getEditFormOnly')->name('products.getEditFormOnly');
 
 Route::resource('categories', 'CategoryController');
 Route::post('category/getDataFirst/', 'CategoryController@getDataFirst')->name('categories.getDataFirst');
@@ -26,6 +28,7 @@ Route::post('category/simpan_edit_category/', 'CategoryController@simpan_edit_ca
 Route::post('category/delete_data_category_ajax/', 'CategoryController@delete_data_category_ajax')->name('categories.delete_data_category_ajax');
 
 Route::resource('transactions', 'TransactionController');
+Route::resource('transactions.index', 'TransactionController@index');
 Route::post('transactions/showDataAjax/', 'TransactionController@showAjax')->name('transaction.showAjax');
 
 Route::resource('brands', 'BrandController');

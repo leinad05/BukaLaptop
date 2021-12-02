@@ -3,6 +3,34 @@
     Transactions
 @endsection
 @section('tempat_konten')
+
+    {{-- ini popup utk btn show /ajax --}}
+    <div class="modal fade" id="editModals" tabindex="-1" role="basic" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Edit Transaction</h4>
+                </div>
+                <form role="form" method = "POST" action = "">
+                    <div class="modal-body" >
+                            @csrf
+                            <label>Transaction: </label>
+                            <input type="text" class="form-control" name = "nmSupplier">
+                            <small class = "form-text text-muted">Isikan nama supplier anda</small>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type = "submit" class = "btn btn-primary" value = "x">Submit</button>
+                    </div>     
+                </form> 
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    {{-- end ini popup utk btn show /ajax --}}
+
     <div class="row">
         <div class="col">
 
@@ -38,9 +66,14 @@
                                     <td class="editable text-center" id="data_total_{{ $t->id }}">
                                         {{ $t->total }}</td>
                                     <td class="text-right">
-                                        <a href="#" class="btn btn-sm btn-warning" data-toggle="modal" onclick="">Ubah</a>
+                                        <a class = "btn btn-sm btn-warning" onclick="getDataFirst({{ $t->id }})" data-toggle="modal" href="#editModals">Ubah w/Modal-Ajax</a>
                                         {{-- @can('delete-permission', $t) --}}
-                                        <button type="button" class="btn btn-sm btn-danger" onclick="">Delete</button>
+                                        <form method = "POST" action = "{{ route('transactions.destroy', $t->id) }}">
+                                            @method('DELETE')
+                                            @csrf
+                                            <button type="submit" class="btn btn-sm btn-danger" onclick="if(!confirm('This transaction will be deleted. are you sure?')){return false;}">Delete
+                                            w/Modal-Ajax</button>
+                                        </form>
                                         {{-- @endcan --}}
                                         <a href="#" data-target="#basic" class="btn btn-sm btn-primary" data-toggle="modal"
                                             onclick="getDetailData({{ $t->id }})">Show Detail</a>
