@@ -103,6 +103,6 @@ class ProductController extends Controller
 
     public function front_index(){
         $products = Product::all();
-        return view('frontend.product');
+        return view('frontend.product', compact('products'));
     }
 }
