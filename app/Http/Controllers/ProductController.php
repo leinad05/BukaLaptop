@@ -78,7 +78,7 @@ class ProductController extends Controller
         //
         $categories = Category::all();
         $brands = Brand::all();
-        return view('product.editproduct', compact('categories','brands','product'));
+        return view('product.editdetail', compact('categories','brands','product'));
     }
 
     /**
@@ -101,7 +101,21 @@ class ProductController extends Controller
         $product->foto = "11";
         $product->brand_id = $request->get('brand_id');
         $product->save();
-        return redirect()->route('products.index')->with('status','Data Produk berhasil diubah');
+        return redirect()->route('products.index')->with('status','Data successfully changed');
+    }
+
+    public function update2(Request $request, $id)
+    {
+        //
+        $product = Product::find($id);
+        $s = $product->specifications;
+        foreach ($product->specifications as $s) {
+            $s->pivot->keterangan = $request->get($s->nama);
+            $s->pivot->save();
+        }
+        return redirect()->route('products.index')->with('status','Product Specification has been changed.');
+        //$product->save();
+        //return redirect()->route('products.index')->with('status','Data Produk berhasil diubah');
     }
 
     /**
