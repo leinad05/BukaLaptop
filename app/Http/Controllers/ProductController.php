@@ -105,4 +105,35 @@ class ProductController extends Controller
         $products = Product::all();
         return view('frontend.product', compact('products'));
     }
+
+    public function cart()
+    {
+        return view('frontend.cart');
+    }
+
+    public function addToCart($id)
+    {
+        $product = Product::find($id);
+        if(!$product)
+        {
+            abort('404');
+        }
+
+        $cart = session()->get('cart');
+        if(!isset($cart[$id])) 
+        {
+            $cart[$id] = [
+                'name' => $product->nama,
+                'quantity' => 1,
+                'price' => $product->harga,
+                'photo' => $product->image
+            ];
+        }
+        else 
+        {
+            $cart[$id]['quantity']++;
+        }
+        session()->put('cart', $cart);
+        return redirect()->back()->with('success', 'Product added to cart successfully!');
+    }
 }
