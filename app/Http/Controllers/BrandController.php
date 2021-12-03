@@ -39,7 +39,7 @@ class BrandController extends Controller
         $new_brand = new Brand();
         $new_brand->nama_brand = $request->name;
         $new_brand->save();
-        return redirect('brands')->with('status_sukses', 'Successfully add brand data');
+        return redirect('brands')->with('sukses', 'Successfully add brand data');
     }
 
     /**
@@ -91,7 +91,7 @@ class BrandController extends Controller
         $id = $request->id_brand;
         $brand = Brand::find($id);
         return response()->json(array(
-            'status' => 'oke',
+            'status' => 'sukses',
             'msg'=>view('brand.editformmodal', compact('brand'))->render()
         ),200);
     }
@@ -105,7 +105,7 @@ class BrandController extends Controller
         $brand->save();
 
         return response()->json(array(
-            'status' => 'oke',
+            'status' => 'sukses',
             'msg'=> 'Successfully edit brand data'
         ),200);
     }
@@ -115,7 +115,7 @@ class BrandController extends Controller
         try {
             $brand->delete();
             return response()->json(array(
-                'status' => 'oke',
+                'status' => 'sukses',
                 'msg'=> 'Successfully delete brand data'
             ),200);
         } catch (\PDOException $e) {

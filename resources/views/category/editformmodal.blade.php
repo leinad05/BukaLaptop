@@ -26,7 +26,7 @@
             },
             function(data){
                 $('#eBtnEdit').html('Save');
-                if(data.status == 'oke'){
+                if(data.status == 'sukses'){
                     $('.modal').modal('hide');
                     $('#data_name_'+id_category).html(name);
                 }

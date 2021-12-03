@@ -3,25 +3,9 @@
     Brands
 @endsection
 @section('tempat_konten')
-    @if (session('status_sukses'))
+    @if (session('sukses'))
         <div class="alert alert-success" role="alert">
-            {{ session('status_sukses') }}
-        </div>
-    @endif
-    @if (session('oke'))
-        <div class="alert alert-success" role="alert">
-            {{ session('oke') }}
-        </div>
-    @endif
-    @if (session('status_gagal'))
-        <div class="alert alert-danger" role="alert">
-            {{ session('status_gagal') }}
-        </div>
-    @endif
-
-    @if (session('status'))
-        <div class="alert alert-success" role="alert">
-            {{ session('status') }}
+            {{ session('sukses') }}
         </div>
     @endif
     @if (session('error'))
@@ -140,7 +124,7 @@
                     id_brand: id_brand
                 },
                 function(data) {
-                    if (data.status == 'oke') {
+                    if (data.status == 'sukses') {
                         $('#isi_modal_edit_brand').html(data.msg);
                     } else {
                         $('#isi_modal_edit_brand').html('Gagal ambil data');
@@ -158,7 +142,7 @@
                         id_brand: id_brand
                     },
                     function(data) {
-                        if (data.status == 'oke') {
+                        if (data.status == 'sukses') {
                             $('#tr_' + id_brand).remove();
                         }
                         // alert(data.msg);

@@ -47,7 +47,8 @@ class TransactionController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = Transaction::find($id);
+        return view('transaction.confirmation', compact('data'));
     }
 
     /**

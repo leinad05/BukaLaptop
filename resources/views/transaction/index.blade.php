@@ -12,18 +12,18 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                     <h4 class="modal-title">Edit Transaction</h4>
                 </div>
-                <form role="form" method = "POST" action = "">
-                    <div class="modal-body" >
-                            @csrf
-                            <label>Transaction: </label>
-                            <input type="text" class="form-control" name = "nmSupplier">
-                            <small class = "form-text text-muted">Isikan nama supplier anda</small>
+                <form role="form" method="POST" action="">
+                    <div class="modal-body">
+                        @csrf
+                        <label>Transaction: </label>
+                        <input type="text" class="form-control" name="nmSupplier">
+                        <small class="form-text text-muted">Isikan nama supplier anda</small>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type = "submit" class = "btn btn-primary" value = "x">Submit</button>
-                    </div>     
-                </form> 
+                        <button type="submit" class="btn btn-primary" value="x">Submit</button>
+                    </div>
+                </form>
             </div>
             <!-- /.modal-content -->
         </div>
@@ -52,6 +52,7 @@
                                 <th class="text-center">Customer</th>
                                 <th class="text-center">Transaction Date</th>
                                 <th class="text-center">Total</th>
+                                <th class="text-center">Status</th>
                                 <th class="text-right">Action</th>
                             </tr>
                         </thead>
@@ -65,17 +66,31 @@
                                         {{ $t->tanggal_transaksi }}</td>
                                     <td class="editable text-center" id="data_total_{{ $t->id }}">
                                         {{ $t->total }}</td>
+                                    <td class="editable text-center" id="data_status_{{ $t->id }}">
+                                        {{ $t->status }}</td>
+
                                     <td class="text-right">
-                                        <a class = "btn btn-sm btn-warning" onclick="getDataFirst({{ $t->id }})" data-toggle="modal" href="#editModals">Ubah</a>
-                                        {{-- @can('delete-permission', $t) --}}
-                                        <form method = "POST" action = "{{ route('transactions.destroy', $t->id) }}">
-                                            @method('DELETE')
-                                            @csrf
-                                            <button type="submit" class="btn btn-sm btn-danger" onclick="if(!confirm('This transaction will be deleted. are you sure?')){return false;}">Delete</button>
-                                        </form>
-                                        {{-- @endcan --}}
-                                        <a href="#" data-target="#basic" class="btn btn-sm btn-primary" data-toggle="modal"
-                                            onclick="getDetailData({{ $t->id }})">Show Detail</a>
+
+                                        <div class="dropdown">
+                                            <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                              <i class="fas fa-ellipsis-v"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                              
+                                              <a href="#" data-target="#basic" data-toggle="modal" class="dropdown-item" onclick="getDetailData({{ $t->id }})">Show Detail</a>
+
+                                              <a class="dropdown-item" href="{{ route('transactions.show', $t->id) }}">Show Confirmation</a>
+
+                                              {{-- @can('delete-permission', $p) --}}
+                                              <form method = "POST" action = "{{ route('transactions.destroy', $t->id) }}">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button class="dropdown-item" href="#" onclick="if(!confirm('This transaction will be deleted. are you sure?')){return false;}" type = "submit">Delete</button>
+                                              </form>
+                                              {{-- @endcan --}}
+
+                                            </div>
+                                          </div>
                                     </td>
                                 </tr>
                             @endforeach
