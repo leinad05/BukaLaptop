@@ -6,6 +6,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -53,7 +54,17 @@ class ProductController extends Controller
         // $new_product->foto = $request->image;
         $new_product->foto = 11;
         $new_product->save();
-        return redirect('products')->with('status', 'Successfully add product data');
+
+        // dd($new_product->id);
+
+        for ($i=1; $i < 9; $i++) { 
+            DB::table('product_specification')->insert([
+                'product_id' => $new_product->id,
+                'specification_id' => $i
+            ]);
+        }
+
+        return redirect('products/'.$new_product->id.'/edit')->with('status', 'Successfully add product data');
     }
 
     /**
@@ -126,8 +137,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
-        //$product->delete();
+        $product->delete();
         return redirect()->route('products.index')->with('status','Successfully deleted');
     }
 
