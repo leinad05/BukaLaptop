@@ -53,7 +53,7 @@ class ProductController extends Controller
         // $new_product->foto = $request->image;
         $new_product->foto = 11;
         $new_product->save();
-        return redirect('products')->with('status_sukses', 'Successfully add product data');
+        return redirect('products')->with('status', 'Successfully add product data');
     }
 
     /**
@@ -78,7 +78,7 @@ class ProductController extends Controller
         //
         $categories = Category::all();
         $brands = Brand::all();
-        return view('product.editdetail', compact('categories','brands','product'));
+        return view('product.editspecification', compact('categories','brands','product'));
     }
 
     /**

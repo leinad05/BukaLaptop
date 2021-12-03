@@ -66,13 +66,12 @@
                                     <td class="editable text-center" id="data_total_{{ $t->id }}">
                                         {{ $t->total }}</td>
                                     <td class="text-right">
-                                        <a class = "btn btn-sm btn-warning" onclick="getDataFirst({{ $t->id }})" data-toggle="modal" href="#editModals">Ubah w/Modal-Ajax</a>
+                                        <a class = "btn btn-sm btn-warning" onclick="getDataFirst({{ $t->id }})" data-toggle="modal" href="#editModals">Ubah</a>
                                         {{-- @can('delete-permission', $t) --}}
                                         <form method = "POST" action = "{{ route('transactions.destroy', $t->id) }}">
                                             @method('DELETE')
                                             @csrf
-                                            <button type="submit" class="btn btn-sm btn-danger" onclick="if(!confirm('This transaction will be deleted. are you sure?')){return false;}">Delete
-                                            w/Modal-Ajax</button>
+                                            <button type="submit" class="btn btn-sm btn-danger" onclick="if(!confirm('This transaction will be deleted. are you sure?')){return false;}">Delete</button>
                                         </form>
                                         {{-- @endcan --}}
                                         <a href="#" data-target="#basic" class="btn btn-sm btn-primary" data-toggle="modal"
