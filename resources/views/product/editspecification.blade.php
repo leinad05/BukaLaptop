@@ -1,6 +1,6 @@
 @extends('layouts.argon')
 @section('judul_halaman')
-    Detail Product
+    Edit Product
 @endsection
 @section('tempat_konten')
     <div class="row">

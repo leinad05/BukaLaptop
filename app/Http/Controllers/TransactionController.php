@@ -50,8 +50,13 @@ class TransactionController extends Controller
      */
     public function show($id)
     {
+<<<<<<< HEAD
         $this->authorize('access-permission-transaction');
         //
+=======
+        $data = Transaction::find($id);
+        return view('transaction.confirmation', compact('data'));
+>>>>>>> ed4754a9d20a20cd386061a56310567f59885c26
     }
 
     /**
@@ -77,6 +82,10 @@ class TransactionController extends Controller
     {
         $this->authorize('access-permission-transaction');
         //
+        $transaction = Transaction::find($id);
+        $transaction->status = $request->get('name');
+        $transaction->save();
+        return redirect()->route('products.index')->with('status','Data successfully changed');
     }
 
     /**
@@ -101,5 +110,13 @@ class TransactionController extends Controller
         return response()->json(array(
             'msg'=>view('transaction.showmodal', compact('data'))->render()
         ),200);
+    }
+
+    public function acceptTransaction(Transaction $transaction)
+    {
+        // $transaction = Transaction::find($id);
+        $transaction->status = "diterima";
+        $transaction->save();
+        return redirect()->route('transactions.index')->with('status','successfully acc');
     }
 }

@@ -24,7 +24,7 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>
+                                <th class="text-center">
                                     <h4>Data</h4>
                                 </th>
                                 <th>
@@ -34,35 +34,35 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Image</td>
+                                <td class="text-center"><b>Image</b></td>
                                 <td>{{ $product->foto }}</td>
                             </tr>
                             <tr>
-                                <td>Product ID</td>
+                                <td class="text-center"><b>Product ID</b></td>
                                 <td>{{ $product->id }}</td>
                             </tr>
                             <tr>
-                                <td>Name</td>
+                                <td class="text-center"><b>Name</b></td>
                                 <td>{{ $product->nama }}</td>
                             </tr>
                             <tr>
-                                <td>Brand</td>
+                                <td class="text-center"><b>Brand</b></td>
                                 <td>{{ $product->brand->nama_brand }}</td>
                             </tr>
                             <tr>
-                                <td>Description</td>
+                                <td class="text-center"><b>Description</b></td>
                                 <td>{{ $product->deskripsi }}</td>
                             </tr>
 
                             @foreach ($product->specifications as $s)
                                 <tr>
-                                    <td>{{ $s->nama }}</td>
+                                    <td class="text-center"><b>{{ $s->nama }}</b></td>
                                     <td>{{ $s->pivot->keterangan }}</td>
                                 </tr>
                             @endforeach
                             
                             <tr>
-                                <td>Price</td>
+                                <td class="text-center"><b>Price</b></td>
                                 <td>{{ $product->harga }}</td>
                             </tr>
 

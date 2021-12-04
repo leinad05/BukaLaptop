@@ -42,7 +42,7 @@ class CategoryController extends Controller
         $new_category = new Category();
         $new_category->nama_kategori = $request->name;
         $new_category->save();
-        return redirect('categories')->with('status_sukses', 'Successfully add category data');
+        return redirect('categories')->with('sukses', 'Successfully add category data');
     }
 
     /**
@@ -99,7 +99,7 @@ class CategoryController extends Controller
         $id = $request->id_category;
         $category = Category::find($id);
         return response()->json(array(
-            'status' => 'oke',
+            'status' => 'sukses',
             'msg'=>view('category.editformmodal', compact('category'))->render()
         ),200);
     }
@@ -114,7 +114,7 @@ class CategoryController extends Controller
         $category->save();
 
         return response()->json(array(
-            'status' => 'oke',
+            'status' => 'sukses',
             'msg'=> 'Successfully edit category data'
         ),200);
     }
@@ -125,7 +125,7 @@ class CategoryController extends Controller
         try {
             $category->delete();
             return response()->json(array(
-                'status' => 'oke',
+                'status' => 'sukses',
                 'msg'=> 'Successfully delete category data'
             ),200);
         } catch (\PDOException $e) {
