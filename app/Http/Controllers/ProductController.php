@@ -142,9 +142,13 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+<<<<<<< Updated upstream
         $this->authorize('access-permission-product');
         //
         //$product->delete();
+=======
+        $product->delete();
+>>>>>>> Stashed changes
         return redirect()->route('products.index')->with('status','Successfully deleted');
     }
 

@@ -45,10 +45,14 @@
                                 <td class="text-center"><b>Name</b></td>
                                 <td>{{ $product->nama }}</td>
                             </tr>
-                            <tr>
+
+                            {{-- kenak softdelet error --}}
+                            {{-- <tr>
                                 <td class="text-center"><b>Brand</b></td>
                                 <td>{{ $product->brand->nama_brand }}</td>
-                            </tr>
+                            </tr> --}}
+
+
                             <tr>
                                 <td class="text-center"><b>Description</b></td>
                                 <td>{{ $product->deskripsi }}</td>

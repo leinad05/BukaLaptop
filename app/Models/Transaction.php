@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Transaction extends Model
 {
+    use SoftDeletes;
     public function user(){
         return $this->belongsTo('App\User', 'user_id', 'id');
     }
@@ -15,14 +17,13 @@ class Transaction extends Model
         ->withPivot('quantity', 'harga');
     }
 
-    public function insertProduct($cart, $user){
+    public function insertProduct($cart){
         $total = 0;
-        //dapat dari array atau key dari details
         foreach ($cart as $id_produk => $details) {
             $total += $details['price']*$details['quantity'];
             $this->products()->attach($id_produk, [
                 'quantity'=>$details['quantity'],
-                'harga_produk'=>$details['price'],
+                'harga'=>$details['price'],
                 'subtotal'=>$details['quantity']*$details['price']
             ]);
         }

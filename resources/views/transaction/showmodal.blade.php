@@ -23,7 +23,9 @@
 
                                     </div>
                                     <div class="col align-self-center">
-                                        <b>Category: </b> {{ $dp->category->nama_kategori }} <br>
+                                        {{-- bug kena soft delete --}}
+                                        {{-- <b>Category: </b> {{ $dp->category->nama_kategori }} <br> --}}
+
                                         <b>Price: </b> Rp {{ $dp->pivot->harga }} <br>
                                         <b>Quantity: </b> {{ $dp->pivot->quantity }} <br>
                                         <b>Total: </b> {{ $dp->pivot->quantity*$dp->pivot->harga }} <br>

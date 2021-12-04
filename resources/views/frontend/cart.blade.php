@@ -50,8 +50,8 @@
             <td colspan="2" class="hidden-xs"></td>
             <td class="hidden-xs text-center"><strong>Total Rp. {{ $total }}</strong></td>
             <td>
-                {{-- <a href="{{ route('submitcheckout') }}" class="btn btn-primary">Checkout <i class="fa fa-angle-right"></i></a> --}}
-                <a href="" class="btn btn-primary">Checkout <i class="fa fa-angle-right"></i></a>
+                <a href="{{ route('submitcheckout') }}" class="btn btn-primary">Checkout <i class="fa fa-angle-right"></i></a>
+                {{-- <a href="" class="btn btn-primary">Checkout <i class="fa fa-angle-right"></i></a> --}}
             </td>
         </tr>
         </tfoot>

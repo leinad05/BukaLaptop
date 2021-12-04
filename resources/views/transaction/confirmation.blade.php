@@ -77,7 +77,7 @@
                         <div class="card-footer py-4">
                             <div class="row">
                                 <div class="col-12 text-right">
-                                    @if ($data->status != 'diterima')
+                                    @if ($data->status != 'Accepted')
                                         <a class="btn btn-sm btn-success"
                                             href="{{ url('transactions/acceptTransaction/' . $data->id) }}">Accept</a>
                                     @else

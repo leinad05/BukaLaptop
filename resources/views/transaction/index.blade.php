@@ -33,7 +33,11 @@
 
     <div class="row">
         <div class="col">
-
+            @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            @endif
             <div class="card">
                 <!-- Card header -->
                 <div class="card-header border-0">
@@ -72,25 +76,30 @@
                                     <td class="text-right">
 
                                         <div class="dropdown">
-                                            <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                              <i class="fas fa-ellipsis-v"></i>
+                                            <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-v"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                              
-                                              <a href="#" data-target="#basic" data-toggle="modal" class="dropdown-item" onclick="getDetailData({{ $t->id }})">Show Detail</a>
 
-                                              <a class="dropdown-item" href="{{ route('transactions.show', $t->id) }}">Show Confirmation</a>
+                                                <a href="#" data-target="#basic" data-toggle="modal" class="dropdown-item"
+                                                    onclick="getDetailData({{ $t->id }})">Show Detail</a>
 
-                                              {{-- @can('delete-permission', $p) --}}
-                                              <form method = "POST" action = "{{ route('transactions.destroy', $t->id) }}">
-                                                @method('DELETE')
-                                                @csrf
-                                                <button class="dropdown-item" href="#" onclick="if(!confirm('This transaction will be deleted. are you sure?')){return false;}" type = "submit">Delete</button>
-                                              </form>
-                                              {{-- @endcan --}}
+                                                <a class="dropdown-item"
+                                                    href="{{ route('transactions.show', $t->id) }}">Show Confirmation</a>
+
+                                                {{-- @can('delete-permission', $p) --}}
+                                                <form method="POST" action="{{ route('transactions.destroy', $t->id) }}">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    <button class="dropdown-item" href="#"
+                                                        onclick="if(!confirm('This transaction will be deleted. are you sure?')){return false;}"
+                                                        type="submit">Delete</button>
+                                                </form>
+                                                {{-- @endcan --}}
 
                                             </div>
-                                          </div>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach

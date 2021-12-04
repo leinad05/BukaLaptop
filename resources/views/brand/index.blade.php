@@ -16,7 +16,6 @@
 
     <div class="row">
         <div class="col">
-
             <div class="card">
                 <!-- Card header -->
                 <div class="card-header border-0">
@@ -124,7 +123,7 @@
                     id_brand: id_brand
                 },
                 function(data) {
-                    if (data.status == 'sukses') {
+                    if (data.status == 'oke') {
                         $('#isi_modal_edit_brand').html(data.msg);
                     } else {
                         $('#isi_modal_edit_brand').html('Gagal ambil data');

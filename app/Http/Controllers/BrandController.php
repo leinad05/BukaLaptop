@@ -88,10 +88,15 @@ class BrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Brand $brand)
     {
+<<<<<<< Updated upstream
         $this->authorize('access-permission-brand');
         //
+=======
+        $brand->delete();
+        return redirect('brands')->with('sukses', 'Successfully delete brand data');
+>>>>>>> Stashed changes
     }
 
     public function getDataFirst(Request $request){
@@ -99,7 +104,7 @@ class BrandController extends Controller
         $id = $request->id_brand;
         $brand = Brand::find($id);
         return response()->json(array(
-            'status' => 'sukses',
+            'status' => 'oke',
             'msg'=>view('brand.editformmodal', compact('brand'))->render()
         ),200);
     }

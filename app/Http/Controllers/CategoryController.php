@@ -88,10 +88,14 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
+<<<<<<< Updated upstream
         $this->authorize('access-permission-category');
         //
+=======
+     
+>>>>>>> Stashed changes
     }
 
     public function getDataFirst(Request $request){
@@ -99,7 +103,7 @@ class CategoryController extends Controller
         $id = $request->id_category;
         $category = Category::find($id);
         return response()->json(array(
-            'status' => 'sukses',
+            'status' => 'oke',
             'msg'=>view('category.editformmodal', compact('category'))->render()
         ),200);
     }
@@ -125,7 +129,7 @@ class CategoryController extends Controller
         try {
             $category->delete();
             return response()->json(array(
-                'status' => 'sukses',
+                'status' => 'oke',
                 'msg'=> 'Successfully delete category data'
             ),200);
         } catch (\PDOException $e) {

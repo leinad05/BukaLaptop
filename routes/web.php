@@ -65,6 +65,8 @@ Route::post('brand/delete_data_brand_ajax/', 'BrandController@delete_data_brand_
 Route::get('/', 'ProductController@front_index');
 Route::get('add-to-cart/{id}', 'ProductController@addToCart');
 Route::get('cart', 'ProductController@cart');
+Route::get('submitcheckout', 'TransactionController@submitcheckout')->name('submitcheckout');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

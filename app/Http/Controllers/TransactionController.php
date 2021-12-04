@@ -115,7 +115,7 @@ class TransactionController extends Controller
     public function acceptTransaction(Transaction $transaction)
     {
         // $transaction = Transaction::find($id);
-        $transaction->status = "diterima";
+        $transaction->status = "Accepted";
         $transaction->save();
         return redirect()->route('transactions.index')->with('status','successfully acc');
     }
