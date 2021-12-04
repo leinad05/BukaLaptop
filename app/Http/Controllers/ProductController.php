@@ -142,13 +142,8 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-<<<<<<< Updated upstream
         $this->authorize('access-permission-product');
-        //
-        //$product->delete();
-=======
         $product->delete();
->>>>>>> Stashed changes
         return redirect()->route('products.index')->with('status','Successfully deleted');
     }
 
@@ -166,20 +161,19 @@ class ProductController extends Controller
 
     public function front_index()
     {
-        $this->authorize('access-permission-product');
         $products = Product::all();
         return view('frontend.product', compact('products'));
     }
 
     public function cart()
     {
-        $this->authorize('access-permission-product');
+        // $this->authorize('access-permission-product');
         return view('frontend.cart');
     }
 
     public function addToCart($id)
     {
-        $this->authorize('access-permission-product');
+        // $this->authorize('access-permission-product');
         $product = Product::find($id);
         if(!$product)
         {

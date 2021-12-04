@@ -90,12 +90,8 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-<<<<<<< Updated upstream
         $this->authorize('access-permission-category');
         //
-=======
-     
->>>>>>> Stashed changes
     }
 
     public function getDataFirst(Request $request){

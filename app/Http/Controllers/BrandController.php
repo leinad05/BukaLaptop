@@ -90,13 +90,8 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand)
     {
-<<<<<<< Updated upstream
         $this->authorize('access-permission-brand');
         //
-=======
-        $brand->delete();
-        return redirect('brands')->with('sukses', 'Successfully delete brand data');
->>>>>>> Stashed changes
     }
 
     public function getDataFirst(Request $request){

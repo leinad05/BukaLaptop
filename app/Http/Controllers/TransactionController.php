@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class TransactionController extends Controller
 {
@@ -50,13 +51,9 @@ class TransactionController extends Controller
      */
     public function show($id)
     {
-<<<<<<< HEAD
         $this->authorize('access-permission-transaction');
-        //
-=======
         $data = Transaction::find($id);
         return view('transaction.confirmation', compact('data'));
->>>>>>> ed4754a9d20a20cd386061a56310567f59885c26
     }
 
     /**
@@ -110,6 +107,27 @@ class TransactionController extends Controller
         return response()->json(array(
             'msg'=>view('transaction.showmodal', compact('data'))->render()
         ),200);
+    }
+
+    public function submitcheckout(){
+        // $this->authorize('checkmember');
+
+        $cart = session()->get('cart');
+        // $user = Auth::user();
+
+        $t = new Transaction;
+        // $t->customer_id = $user->id;
+        $t->user_id = 1;
+        $t->tanggal_transaksi = Carbon::now()->toDateTimeString();
+        $t->tanggal_transaksi = date('Y-m-d');
+        $t->save();
+
+        $total_harga = $t->insertProduct($cart);
+        $t->total = $total_harga;
+        $t->save();
+
+        session()->forget('cart');
+        return redirect('home');
     }
 
     public function acceptTransaction(Transaction $transaction)
