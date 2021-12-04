@@ -16,6 +16,7 @@ class ProductController extends Controller
      */
     public function index()
     {
+        $this->authorize('access-permission-product');
         $products = Product::all();
         $categories = Category::all();
         $brands = Brand::all();
@@ -29,6 +30,7 @@ class ProductController extends Controller
      */
     public function create()
     {
+        $this->authorize('access-permission-product');
         $categories = Category::all();
         $brands = Brand::all();
         return view('product.addproduct', compact('categories','brands'));
@@ -42,6 +44,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('access-permission-product');
         $new_product = new Product();
         $new_product->nama = $request->name;
         $new_product->harga = $request->harga;
@@ -64,6 +67,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
+        $this->authorize('access-permission-product');
         return view('product.showdetail', ['product' => $product]);
     }
 
@@ -75,6 +79,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
+        $this->authorize('access-permission-product');
         //
         $categories = Category::all();
         $brands = Brand::all();
@@ -90,6 +95,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->authorize('access-permission-product');
         //
         $product = Product::find($id);
         $product->nama = $request->get('name');
@@ -106,6 +112,7 @@ class ProductController extends Controller
 
     public function update2(Request $request, $id)
     {
+        $this->authorize('access-permission-product');
         //
         $product = Product::find($id);
         $s = $product->specifications;
@@ -126,6 +133,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        $this->authorize('access-permission-product');
         //
         //$product->delete();
         return redirect()->route('products.index')->with('status','Successfully deleted');
@@ -133,6 +141,7 @@ class ProductController extends Controller
 
     public function getEditFormOnly(Request $request)
     {
+        $this->authorize('access-permission-product');
         $id = $request->get('id');
         $product = Product::find($id);
         $categories = Category::all();
@@ -142,18 +151,22 @@ class ProductController extends Controller
         ),200);
     }
 
-    public function front_index(){
+    public function front_index()
+    {
+        $this->authorize('access-permission-product');
         $products = Product::all();
         return view('frontend.product', compact('products'));
     }
 
     public function cart()
     {
+        $this->authorize('access-permission-product');
         return view('frontend.cart');
     }
 
     public function addToCart($id)
     {
+        $this->authorize('access-permission-product');
         $product = Product::find($id);
         if(!$product)
         {

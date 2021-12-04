@@ -24,7 +24,23 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
+        /*
+        Gate::define('access-permission', function($user){
+            return ($user->sebagai == 'pegawai');
+        });
+        */
 
+        Gate::define('access-permission-transaction', 'App\Policies\TransactionPolicy@access');
+        Gate::define('access-permission-product', 'App\Policies\ProductPolicy@access');
+        Gate::define('access-permission-brand', 'App\Policies\BrandPolicy@access');
+        Gate::define('access-permission-category', 'App\Policies\BrandPolicy@access');
+        /*
+        Gate::define('edit-settings', function($user){
+            return ($user->sebagai == 'employee');
+        });
+        */
+        //dengan policies
+        //Gate::define('update-post', 'App\Policies\PostPolicies@update');
         //
     }
 }

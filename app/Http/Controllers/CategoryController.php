@@ -14,6 +14,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        $this->authorize('access-permission-category');
         $data = Category::all();
         return view('category.index', compact('data'));
     }
@@ -25,6 +26,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
+        $this->authorize('access-permission-category');
         //
     }
 
@@ -36,6 +38,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('access-permission-category');
         $new_category = new Category();
         $new_category->nama_kategori = $request->name;
         $new_category->save();
@@ -50,6 +53,7 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
+        $this->authorize('access-permission-category');
         //
     }
 
@@ -61,6 +65,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('access-permission-category');
         //
     }
 
@@ -73,6 +78,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->authorize('access-permission-category');
         //
     }
 
@@ -84,10 +90,12 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('access-permission-category');
         //
     }
 
     public function getDataFirst(Request $request){
+        $this->authorize('access-permission-category');
         $id = $request->id_category;
         $category = Category::find($id);
         return response()->json(array(
@@ -97,6 +105,7 @@ class CategoryController extends Controller
     }
 
     public function simpan_edit_category(Request $request){
+        $this->authorize('access-permission-category');
         $id = $request->id_category;
         $name = $request->name;
 
@@ -111,6 +120,7 @@ class CategoryController extends Controller
     }
 
     public function delete_data_category_ajax(Request $request){
+        $this->authorize('access-permission-category');
         $category = Category::find($request->id_category);
         try {
             $category->delete();

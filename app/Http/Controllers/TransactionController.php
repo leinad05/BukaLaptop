@@ -14,6 +14,7 @@ class TransactionController extends Controller
      */
     public function index()
     {
+        $this->authorize('access-permission-transaction');
         $data = Transaction::all();
         return view('transaction.index', compact('data'));
     }
@@ -25,6 +26,7 @@ class TransactionController extends Controller
      */
     public function create()
     {
+        $this->authorize('access-permission-transaction');
         //
     }
 
@@ -36,6 +38,7 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('access-permission-transaction');
         //
     }
 
@@ -47,6 +50,7 @@ class TransactionController extends Controller
      */
     public function show($id)
     {
+        $this->authorize('access-permission-transaction');
         //
     }
 
@@ -58,6 +62,7 @@ class TransactionController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('access-permission-transaction');
         //
     }
 
@@ -70,6 +75,7 @@ class TransactionController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->authorize('access-permission-transaction');
         //
     }
 
@@ -81,12 +87,14 @@ class TransactionController extends Controller
      */
     public function destroy(Transaction $transaction)
     {
+        $this->authorize('access-permission-transaction');
         //dd("masuk destroy", $transaction);
         $transaction->delete();
         return redirect()->route('transactions.index')->with('status','Successfully deleted');
     }
 
     public function showAjax(Request $request){
+        $this->authorize('access-permission-transaction');
         $id = ($request->get('id'));
         $data = Transaction::find($id);
         $products = $data->products;

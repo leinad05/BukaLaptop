@@ -14,6 +14,7 @@ class BrandController extends Controller
      */
     public function index()
     {
+        $this->authorize('access-permission-brand');
         $data = Brand::all();
         return view('brand.index', compact('data'));
     }
@@ -25,6 +26,7 @@ class BrandController extends Controller
      */
     public function create()
     {
+        $this->authorize('access-permission-brand');
         //
     }
 
@@ -36,6 +38,7 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('access-permission-brand');
         $new_brand = new Brand();
         $new_brand->nama_brand = $request->name;
         $new_brand->save();
@@ -50,6 +53,7 @@ class BrandController extends Controller
      */
     public function show($id)
     {
+        $this->authorize('access-permission-brand');
         //
     }
 
@@ -61,6 +65,7 @@ class BrandController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('access-permission-brand');
         //
     }
 
@@ -73,6 +78,7 @@ class BrandController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->authorize('access-permission-brand');
         //
     }
 
@@ -84,10 +90,12 @@ class BrandController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('access-permission-brand');
         //
     }
 
     public function getDataFirst(Request $request){
+        $this->authorize('access-permission-brand');
         $id = $request->id_brand;
         $brand = Brand::find($id);
         return response()->json(array(
@@ -97,6 +105,7 @@ class BrandController extends Controller
     }
 
     public function simpan_edit_brand(Request $request){
+        $this->authorize('access-permission-brand');
         $id = $request->id_brand;
         $name = $request->name;
 
@@ -111,6 +120,7 @@ class BrandController extends Controller
     }
 
     public function delete_data_brand_ajax(Request $request){
+        $this->authorize('access-permission-brand');
         $brand = Brand::find($request->id_brand);
         try {
             $brand->delete();
