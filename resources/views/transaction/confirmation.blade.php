@@ -28,6 +28,9 @@
                                     </tr>
                                 </thead>
                                 <tbody class="list">
+                                    @php
+                                        $grandtotal = 0;
+                                    @endphp
                                     @foreach ($data->products as $dp)
                                         <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
@@ -47,25 +50,41 @@
                                                 {{ $dp->pivot->quantity }}
                                             </td>
                                             <td class="text-center">
-                                                {{ $dp->pivot->quantity * $dp->pivot->harga }}
+                                                Rp. {{ $dp->pivot->quantity * $dp->pivot->harga }}
                                             </td>
+                                            @php
+                                                $grandtotal += $dp->pivot->quantity * $dp->pivot->harga;
+                                            @endphp
                                         </tr>
                                     @endforeach
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td class="text-center"><h4>GrandTotal: </h4></td>
-                                            <td class="text-center">Rp. 9999999</td>
-                                        </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="text-center">
+                                            <h4>GrandTotal:</h4>
+                                        </td>
+                                        <td class="text-center">
+                                            <h4>Rp. {{ $grandtotal }}</h4>
+                                        </td>
+                                    </tr>
                                 </tbody>
-                                
                             </table>
                         </div>
                         <!-- Card footer -->
                         <div class="card-footer py-4">
+                            <div class="row">
+                                <div class="col-12 text-right">
+                                    @if ($data->status != 'diterima')
+                                        <a class="btn btn-sm btn-success"
+                                            href="{{ url('transactions/acceptTransaction/' . $data->id) }}">Accept</a>
+                                    @else
+                                        <h4 class="text-success">Order has been accepted</h4>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

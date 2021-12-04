@@ -31,6 +31,7 @@ Route::post('category/delete_data_category_ajax/', 'CategoryController@delete_da
 
 Route::resource('transactions', 'TransactionController');
 Route::post('transactions/showDataAjax/', 'TransactionController@showAjax')->name('transaction.showAjax');
+Route::get('transactions/acceptTransaction/{transaction}', 'TransactionController@acceptTransaction')->name('transaction.acceptTransaction');
 
 Route::resource('brands', 'BrandController');
 Route::post('brand/getDataFirst/', 'BrandController@getDataFirst')->name('brands.getDataFirst');

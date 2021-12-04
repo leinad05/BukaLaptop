@@ -72,6 +72,10 @@ class TransactionController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $transaction = Transaction::find($id);
+        $transaction->status = $request->get('name');
+        $transaction->save();
+        return redirect()->route('products.index')->with('status','Data successfully changed');
     }
 
     /**
@@ -94,5 +98,13 @@ class TransactionController extends Controller
         return response()->json(array(
             'msg'=>view('transaction.showmodal', compact('data'))->render()
         ),200);
+    }
+
+    public function acceptTransaction(Transaction $transaction)
+    {
+        // $transaction = Transaction::find($id);
+        $transaction->status = "diterima";
+        $transaction->save();
+        return redirect()->route('transactions.index')->with('status','successfully acc');
     }
 }
