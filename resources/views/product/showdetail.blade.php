@@ -25,10 +25,10 @@
                         <thead>
                             <tr>
                                 <th class="text-center">
-                                    <h4>Data</h4>
+                                    <h4>specification</h4>
                                 </th>
                                 <th>
-                                    <h4>Value</h4>
+                                    <h4>Detail</h4>
                                 </th>
                             </tr>
                         </thead>
