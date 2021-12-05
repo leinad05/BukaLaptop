@@ -72,6 +72,7 @@
         <div class="row">
             <div class="col-lg-12 col-sm-12 col-12 main-section">
                 <div class="dropdown">
+                    @can('cart-permission-product')
                     <button type="button" class="btn btn-info" data-toggle="dropdown">
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart 
                         <span class="badge badge-pill badge-danger">
@@ -82,6 +83,7 @@
                             @endif
                         </span>
                     </button>
+                    @endcan
                     <div class="dropdown-menu">
                         <?php $total = 0; $nomer = 0; ?>
                         @if(session('cart'))

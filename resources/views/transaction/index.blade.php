@@ -92,9 +92,11 @@
                                                 <form method="POST" action="{{ route('transactions.destroy', $t->id) }}">
                                                     @method('DELETE')
                                                     @csrf
+                                                    @can('delete-permission-transaction', $t)
                                                     <button class="dropdown-item" href="#"
                                                         onclick="if(!confirm('This transaction will be deleted. are you sure?')){return false;}"
                                                         type="submit">Delete</button>
+                                                    @endcan
                                                 </form>
                                                 {{-- @endcan --}}
 

@@ -17,7 +17,7 @@ class HrController extends Controller
      */
     public function index()
     {
-        $this->authorize('access-permission-brand');
+        $this->authorize('access-permission-HR');
         $data = DB::table('users')->where('sebagai', '=', 'employee')->get();
         return view('hrm.index', compact('data'));
     }
@@ -40,7 +40,7 @@ class HrController extends Controller
      */
     public function store(Request $request)
     {
-        $this->authorize('access-permission-brand');
+        $this->authorize('access-permission-HR');
         DB::table('users')->insert(
             [
                 'name' => $request->name,
@@ -99,7 +99,7 @@ class HrController extends Controller
     }
 
     public function getDataFirst(Request $request){
-        $this->authorize('access-permission-brand');
+        $this->authorize('access-permission-HR');
         $id = $request->id_user;
         $employee = User::find($id);
 
@@ -110,7 +110,7 @@ class HrController extends Controller
     }
 
     public function simpan_edit_hr(Request $request){
-        $this->authorize('access-permission-brand');
+        $this->authorize('access-permission-HR');
         $id = $request->id_user;
         $name = $request->name;
         $email = $request->email;
@@ -129,7 +129,7 @@ class HrController extends Controller
     }
 
     public function delete_data_hr_ajax(Request $request){
-        $this->authorize('access-permission-brand');
+        $this->authorize('access-permission-HR');
         $employee = User::find($request->id_user);
         try {
             $employee->delete();
@@ -147,7 +147,7 @@ class HrController extends Controller
     }
 
     public function suspend_data_hr_ajax($id){
-        $this->authorize('access-permission-brand');
+        $this->authorize('access-permission-HR');
         
         $employee = User::find($id);
         $current_stat = $employee->status;

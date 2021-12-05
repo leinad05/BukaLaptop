@@ -167,13 +167,13 @@ class ProductController extends Controller
 
     public function cart()
     {
-        // $this->authorize('access-permission-product');
+        $this->authorize('cart-permission-product');
         return view('frontend.cart');
     }
 
     public function addToCart($id)
     {
-        // $this->authorize('access-permission-product');
+        $this->authorize('cart-permission-product');
         $product = Product::find($id);
         if(!$product)
         {

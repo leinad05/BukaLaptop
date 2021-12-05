@@ -3,11 +3,10 @@
 namespace App\Policies;
 
 use App\User;
-//use Facade\FlareClient\Http\Response;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
 
-class TransactionPolicy
+class HrPolicy
 {
     use HandlesAuthorization;
 
@@ -23,17 +22,8 @@ class TransactionPolicy
 
     public function access(User $user)
     {
-        return ($user->sebagai == 'employee' || $user->sebagai == 'owner'
-                ? Response::allow() 
-                : Response::deny('Access denied.')
-        );
-    }
-
-    public function delete(User $user)
-    {
         return ($user->sebagai == 'owner'
-                ? Response::allow() 
-                : Response::deny('Access denied.')
-        );
+        ? Response::allow() 
+        : Response::deny('Access denied.'));
     }
 }

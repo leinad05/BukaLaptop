@@ -16,9 +16,11 @@
                         <h4>{{ $product->nama }}</h4>
                         <p>{{ Str::limit($product->deskripsi, 50) }}</p>
                         <p><strong>Price: </strong>Rp.{{ $product->harga }}</p>
+                        @can('cart-permission-product', $product)
                         <p class="btn-holder">
                             <a href="{{ url('add-to-cart/' . $product->id) }}" class="btn btn-warning btn-block text-center" role="button">Add to cart</a>
                         </p>
+                        @endcan
                     </div>
                 </div>
             </div>

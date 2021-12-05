@@ -93,7 +93,7 @@ class TransactionController extends Controller
      */
     public function destroy(Transaction $transaction)
     {
-        $this->authorize('access-permission-transaction');
+        $this->authorize('delete-permission-transaction');
         //dd("masuk destroy", $transaction);
         $transaction->delete();
         return redirect()->route('transactions.index')->with('status','Successfully deleted');

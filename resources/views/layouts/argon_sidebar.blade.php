@@ -18,12 +18,14 @@
                             <span class="nav-link-text">View Frontend</span>
                         </a>
                     </li>
+                    @can('access-permission-HR')
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('hr.index') }}">
                             <i class="ni ni-circle-08 text-info"></i>
                             <span class="nav-link-text">Human Resource Management</span>
                         </a>
                     </li>
+                    @endcan
                 </ul>
 
                 <!-- Divider -->
