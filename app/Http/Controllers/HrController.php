@@ -1,11 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\User;
 
-use App\Models\Brand;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
-class BrandController extends Controller
+class HrController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +18,8 @@ class BrandController extends Controller
     public function index()
     {
         $this->authorize('access-permission-brand');
-        $data = Brand::all();
-        return view('brand.index', compact('data'));
+        $data = DB::table('users')->where('sebagai', '=', 'employee')->get();
+        return view('hrm.index', compact('data'));
     }
 
     /**
@@ -26,7 +29,6 @@ class BrandController extends Controller
      */
     public function create()
     {
-        $this->authorize('access-permission-brand');
         //
     }
 
@@ -39,10 +41,16 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         $this->authorize('access-permission-brand');
-        $new_brand = new Brand();
-        $new_brand->nama_brand = $request->name;
-        $new_brand->save();
-        return redirect('brands')->with('sukses', 'Successfully add employee data');
+        DB::table('users')->insert(
+            [
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => $request->password,
+                'sebagai' => 'employee',
+                'status' => 'active'
+            ]
+        );
+        return redirect('hr')->with('sukses', 'Successfully add employee data');
     }
 
     /**
@@ -53,7 +61,6 @@ class BrandController extends Controller
      */
     public function show($id)
     {
-        $this->authorize('access-permission-brand');
         //
     }
 
@@ -65,7 +72,6 @@ class BrandController extends Controller
      */
     public function edit($id)
     {
-        $this->authorize('access-permission-brand');
         //
     }
 
@@ -78,7 +84,6 @@ class BrandController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->authorize('access-permission-brand');
         //
     }
 
@@ -88,49 +93,52 @@ class BrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Brand $brand)
+    public function destroy($id)
     {
-        $this->authorize('access-permission-brand');
         //
     }
 
     public function getDataFirst(Request $request){
         $this->authorize('access-permission-brand');
-        $id = $request->id_brand;
-        $brand = Brand::find($id);
+        $id = $request->id_user;
+        $employee = User::find($id);
+
         return response()->json(array(
             'status' => 'oke',
-            'msg'=>view('brand.editformmodal', compact('brand'))->render()
+            'msg'=>view('hrm.editformmodal', compact('employee'))->render()
         ),200);
     }
 
-    public function simpan_edit_brand(Request $request){
+    public function simpan_edit_hr(Request $request){
         $this->authorize('access-permission-brand');
-        $id = $request->id_brand;
+        $id = $request->id_user;
         $name = $request->name;
+        $email = $request->email;
+        $password = $request->password;
 
-        $brand = Brand::find($id);
-        $brand->nama_brand = $name;
-        $brand->save();
+        $employee = User::find($id);
+        $employee->name = $name;
+        $employee->email = $email;
+        $employee->password = $password;
+        $employee->save();
 
         return response()->json(array(
             'status' => 'sukses',
-            'msg'=> 'Successfully edit brand data'
+            'msg'=> 'Successfully edit employee data'
         ),200);
     }
 
-    public function delete_data_brand_ajax(Request $request){
+    public function delete_data_hr_ajax(Request $request){
         $this->authorize('access-permission-brand');
-        $brand = Brand::find($request->id_brand);
+        $employee = User::find($request->id_user);
         try {
-            $brand->delete();
+            $employee->delete();
             return response()->json(array(
                 'status' => 'sukses',
-                'msg'=> 'Successfully delete brand data'
+                'msg'=> 'Successfully delete employee data'
             ),200);
         } catch (\PDOException $e) {
             $msg = "Failed to delete data";
-
             return response()->json(array(
                 'status' => 'error',
                 'msg'=> $msg
@@ -138,4 +146,21 @@ class BrandController extends Controller
         }
     }
 
+    public function suspend_data_hr_ajax($id){
+        $this->authorize('access-permission-brand');
+        
+        $employee = User::find($id);
+        $current_stat = $employee->status;
+        $stat = "";
+        if ($current_stat == "active") {
+            $stat = "suspended";
+        } else {
+            $stat = "active";
+        }
+        
+        $employee->status = $stat;
+        $employee->save();
+
+        return redirect('hr')->with('sukses', 'Successfully update employee status');
+    }
 }

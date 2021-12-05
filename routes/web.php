@@ -38,6 +38,12 @@ Route::middleware(['auth'])->group(function(){
     Route::post('brand/getDataFirst/', 'BrandController@getDataFirst')->name('brands.getDataFirst');
     Route::post('brand/simpan_edit_brand/', 'BrandController@simpan_edit_brand')->name('brands.simpan_edit_brand');
     Route::post('brand/delete_data_brand_ajax/', 'BrandController@delete_data_brand_ajax')->name('brands.delete_data_brand_ajax');
+
+    Route::resource('hr', 'HrController');
+    Route::post('hr/getDataFirst/', 'HrController@getDataFirst')->name('hr.getDataFirst');
+    Route::post('hr/simpan_edit_hr/', 'HrController@simpan_edit_hr')->name('hr.simpan_edit_hr');
+    Route::post('hr/delete_data_hr_ajax/', 'HrController@delete_data_hr_ajax')->name('hr.delete_data_hr_ajax');
+    Route::get('hr/suspend_data_hr_ajax/{id}', 'HrController@suspend_data_hr_ajax')->name('hr.suspend_data_hr_ajax');
 });
 
 // Route::resource('products', 'ProductController');

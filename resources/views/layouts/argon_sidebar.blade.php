@@ -19,15 +19,9 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="register.html">
+                        <a class="nav-link" href="{{ route('hr.index') }}">
                             <i class="ni ni-circle-08 text-info"></i>
-                            <span class="nav-link-text">Register</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="login.html">
-                            <i class="ni ni-curved-next text-danger"></i>
-                            <span class="nav-link-text">Logout</span>
+                            <span class="nav-link-text">Human Resource Management</span>
                         </a>
                     </li>
                 </ul>
