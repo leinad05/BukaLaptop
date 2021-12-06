@@ -245,7 +245,7 @@ class ProductController extends Controller
     
     public function getCompareData(Request $request)
     {
-        $this->authorize('access-permission-product');
+        $this->authorize('cart-permission-product');
         $id = $request->get('id');
         $product = Product::find($id);
         $arrayData = array();
