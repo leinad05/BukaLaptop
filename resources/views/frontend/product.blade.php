@@ -17,12 +17,12 @@
                     {{-- <img src="{{ $product->foto }}" alt=""> --}}
                     <img src="" height="150" alt="">
                     <div class="caption">
-                        <h4>{{ $product->nama }}</h4>
+                        <h4>{{ Str::limit($product->nama, 15) }}</h4>
                         <p>{{ Str::limit($product->deskripsi, 50) }}</p>
 
                         <?php
-                            $role = Auth::user()->sebagai;
-                            if($role == "employee" || $role == "member" || $role == "owner") 
+                            $role = Auth::user();
+                            if($role != "")
                             {
                                 $harga = "Rp. " . number_format($product->harga,2,',','.');
                             }

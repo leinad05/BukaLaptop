@@ -75,7 +75,7 @@
                         <h2 class="mt-5">
                             Rp. {{ $product->harga }}
                         </h2>
-                        <a href="{{ url('add-to-cart/' . $product->id) }}" class="btn btn-dark btn-rounded mr-1" role="button">
+                        <a href="{{ url('add-cart/' . $product->id) }}" class="btn btn-dark btn-rounded mr-1" role="button">
                             <i class="fa fa-shopping-cart"></i>
                         </a>
                     </div>

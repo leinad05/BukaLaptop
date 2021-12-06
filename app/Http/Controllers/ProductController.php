@@ -200,6 +200,33 @@ class ProductController extends Controller
             $cart[$id]['quantity']++;
         }
         session()->put('cart', $cart);
-        return redirect()->back()->with('success', 'Product added to cart successfully!');
+        return redirect()->back()->with('status', 'Product added to cart successfully!');
+    }
+
+    public function addCartDetail($id)
+    {
+        $this->authorize('cart-permission-product');
+        $product = Product::find($id);
+        if(!$product)
+        {
+            abort('404');
+        }
+
+        $cart = session()->get('cart');
+        if(!isset($cart[$id])) 
+        {
+            $cart[$id] = [
+                'name' => $product->nama,
+                'quantity' => 1,
+                'price' => $product->harga,
+                'photo' => $product->image
+            ];
+        }
+        else 
+        {
+            $cart[$id]['quantity']++;
+        }
+        session()->put('cart', $cart);
+        return redirect()->route('katalog')->with('status', 'Product added to cart successfully!');
     }
 }

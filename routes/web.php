@@ -70,6 +70,7 @@ Route::middleware(['auth'])->group(function(){
 
 Route::get('/', 'ProductController@front_index')->name('katalog');
 Route::get('add-to-cart/{id}', 'ProductController@addToCart');
+Route::get('add-cart/{id}', 'ProductController@addCartDetail')->name('addCart');
 Route::get('cart', 'ProductController@cart');
 Route::get('submitcheckout', 'TransactionController@submitcheckout')->name('submitcheckout');
 Route::get('/showdetail/{product}', 'ProductController@showDetailFrontEnd')->name('detailfrontend');

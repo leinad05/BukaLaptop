@@ -88,10 +88,13 @@
                     </button>
                     @endcan
                     <div class="dropdown-menu">
-                        <?php $total = 0; $nomer = 0; ?>
+                        <?php $total = 0; $nomer = 0; $totalakhir="Rp. 0";?>
                         @if(session('cart'))
                             @foreach(session()->get('cart') as $key => $details)
-                            <?php $total += $details['price'] * $details['quantity']; $nomer++; ?>
+                            <?php 
+                                $total += $details['price'] * $details['quantity']; $nomer++;
+                                $totalakhir = "Rp. " . number_format($total,2,',','.');
+                            ?>
                                 @if($nomer <= 2)
                                 <div class="row cart-detail">
                                     <div class="col-lg-4 col-sm-4 col-4 cart-detail-img">
@@ -99,7 +102,10 @@
                                     </div>
                                     <div class="col-lg-8 col-sm-8 col-8 cart-detail-product">
                                         <p>{{ $details['name'] }}</p>
-                                        <span class="price text-info">Rp. {{ $details['price'] }}</span> 
+                                        <?php
+                                            $harga = "Rp. " . number_format($details['price'],2,',','.');
+                                        ?>
+                                        <span class="price text-info">{{ $harga }}</span> 
                                         <span class="count">Quantity: {{ $details['quantity'] }}</span>
                                     </div>
                                 </div>
@@ -107,7 +113,7 @@
                             @endforeach
                         @endif
                         <div class="row total-header-section">
-                            <div class="col-lg-6 col-sm-6 col-6">
+                            <div class="col-lg-3 col-sm-3 col-3">
                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i> 
                                 <span class="badge badge-pill badge-danger">
                                     @if(session('cart'))
@@ -117,8 +123,8 @@
                                     @endif
                                 </span>
                             </div>
-                            <div class="col-lg-6 col-sm-6 col-6 total-section text-right">
-                                <p>Total: <span class="text-info">Rp. {{ $total }}</span></p>
+                            <div class="col-lg-9 col-sm-9 col-9 total-section text-right">
+                                <p>Total: <span class="text-info">{{ $totalakhir }}</span></p>
                             </div>
                         </div>
                         <div class="row">
