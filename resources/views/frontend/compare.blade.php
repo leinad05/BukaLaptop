@@ -20,7 +20,6 @@
 <body>
 
     <div class="container">
-
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -81,29 +80,6 @@
                 </div>
             </div>
         </nav>
-        <div class="row">
-            <div class="col-lg-2 col-sm-2 col-2 main-section">
-                @can('cart-permission-product')
-                    <a class="btn btn-secondary" href="#" role="button">Bandingkan Produk</a>
-                @endcan
-            </div>
-            <div class="col-lg-10 col-sm-10 col-10 main-section">
-                <div class="dropdown">
-                    @can('cart-permission-product')
-                        <button type="button" class="btn btn-info" data-toggle="dropdown">
-                            <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart
-                            <span class="badge badge-pill badge-danger">
-                                @if (session('cart'))
-                                    {{ sizeof(session()->get('cart')) }}
-                                @else
-                                    0
-                                @endif
-                            </span>
-                        </button>
-                    @endcan
-                </div>
-            </div>
-        </div>
     </div>
 
     <div class="container page">
@@ -227,10 +203,10 @@
                     </div> --}}
 
                     <div class="col-lg-5 col-sm-5 col-5">
-                        <table class="table">
+                        <table class="table table-borderless">
                             <thead>
                                 <tr>
-                                    <th scope="col">#</th>
+                                    <th scope="col">&nbsp;</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -260,10 +236,10 @@
                         </table>
                     </div>
                     <div class="col-lg-5 col-sm-5 col-5">
-                        <table class="table">
+                        <table class="table table-borderless">
                             <thead>
                                 <tr>
-                                    <th scope="col">#</th>
+                                    <th scope="col">&nbsp;</th>
                                 </tr>
                             </thead>
                             <tbody>
