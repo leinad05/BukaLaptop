@@ -15,7 +15,6 @@
                         </div>
                         <div class="col-4 text-right">
                             <a href="{{ route('products.edit', $product) }}" class="btn btn-sm btn-neutral">Edit</a>
-                            <a href="#" class="btn btn-sm btn-neutral">Delete</a>
                         </div>
                     </div>
                 </div>

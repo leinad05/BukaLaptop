@@ -80,6 +80,11 @@ class ProductController extends Controller
         return view('product.showdetail', ['product' => $product]);
     }
 
+    public function showDetailFrontEnd(Product $product)
+    {
+        return view('frontend.showdetail', ['product' => $product]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

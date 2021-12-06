@@ -29,6 +29,14 @@ class TransactionPolicy
         );
     }
 
+    public function buy(User $user)
+    {
+        return ($user->sebagai == 'member'
+            ? Response::allow() 
+            : Response::deny('Access denied.')
+        );
+    }
+
     public function delete(User $user)
     {
         return ($user->sebagai == 'owner'

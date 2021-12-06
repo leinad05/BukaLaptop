@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends Controller
 {
@@ -110,14 +111,14 @@ class TransactionController extends Controller
     }
 
     public function submitcheckout(){
-        // $this->authorize('checkmember');
+        $this->authorize('buy-permission-transaction');
 
         $cart = session()->get('cart');
-        // $user = Auth::user();
+        $user = Auth::user();
 
         $t = new Transaction;
-        // $t->customer_id = $user->id;
-        $t->user_id = 1;
+        $t->user_id = $user->id;
+        // $t->user_id = 1;
         $t->tanggal_transaksi = Carbon::now()->toDateTimeString();
         $t->tanggal_transaksi = date('Y-m-d');
         $t->save();
@@ -127,7 +128,7 @@ class TransactionController extends Controller
         $t->save();
 
         session()->forget('cart');
-        return redirect('home');
+        return redirect()->route('katalog')->with('status','Successfully Buy!');
     }
 
     public function acceptTransaction(Transaction $transaction)

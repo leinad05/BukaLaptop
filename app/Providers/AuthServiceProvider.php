@@ -32,6 +32,7 @@ class AuthServiceProvider extends ServiceProvider
         
         Gate::define('access-permission-transaction', 'App\Policies\TransactionPolicy@access');
         Gate::define('delete-permission-transaction', 'App\Policies\TransactionPolicy@delete');
+        Gate::define('buy-permission-transaction', 'App\Policies\TransactionPolicy@buy');
         
         Gate::define('access-permission-product', 'App\Policies\ProductPolicy@access');
         Gate::define('cart-permission-product', 'App\Policies\ProductPolicy@cart');

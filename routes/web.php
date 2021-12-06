@@ -66,10 +66,11 @@ Route::middleware(['auth'])->group(function(){
 // Route::post('brand/delete_data_brand_ajax/', 'BrandController@delete_data_brand_ajax')->name('brands.delete_data_brand_ajax');
 
 
-Route::get('/', 'ProductController@front_index');
+Route::get('/', 'ProductController@front_index')->name('katalog');
 Route::get('add-to-cart/{id}', 'ProductController@addToCart');
 Route::get('cart', 'ProductController@cart');
 Route::get('submitcheckout', 'TransactionController@submitcheckout')->name('submitcheckout');
+Route::get('/showdetail/{product}', 'ProductController@showDetailFrontEnd')->name('detailfrontend');
 
 Auth::routes();
 
