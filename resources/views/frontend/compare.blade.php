@@ -61,9 +61,9 @@
                                     <a class="dropdown-item" href="{{ route('products.index') }}">
                                         Kembali ke dashboard
                                     </a>
-                                    
+
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                         document.getElementById('logout-form').submit();">
+                                                                 document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -81,7 +81,7 @@
         <div class="row">
             <div class="col-lg-2 col-sm-2 col-2 main-section">
                 @can('cart-permission-product')
-                    <a class="btn btn-secondary" href="{{ route('compareProduct') }}" role="button">Bandingkan Produk</a>
+                    <a class="btn btn-secondary" href="#" role="button">Bandingkan Produk</a>
                 @endcan
             </div>
             <div class="col-lg-10 col-sm-10 col-10 main-section">
@@ -98,62 +98,88 @@
                             </span>
                         </button>
                     @endcan
-                    <div class="dropdown-menu">
-                        <?php $total = 0;
-                        $nomer = 0;
-                        $totalakhir = 'Rp. 0'; ?>
-                        @if (session('cart'))
-                            @foreach (session()->get('cart') as $key => $details)
-                                <?php
-                                $total += $details['price'] * $details['quantity'];
-                                $nomer++;
-                                $totalakhir = 'Rp. ' . number_format($total, 2, ',', '.');
-                                ?>
-                                @if ($nomer <= 2)
-                                    <div class="row cart-detail">
-                                        <div class="col-lg-4 col-sm-4 col-4 cart-detail-img">
-                                            <img src="{{ asset('img/' . $details['photo']) }}" width="50" height="50">
-                                        </div>
-                                        <div class="col-lg-8 col-sm-8 col-8 cart-detail-product">
-                                            <p>{{ $details['name'] }}</p>
-                                            <?php
-                                            $harga = 'Rp. ' . number_format($details['price'], 2, ',', '.');
-                                            ?>
-                                            <span class="price text-info">{{ $harga }}</span>
-                                            <span class="count">Quantity: {{ $details['quantity'] }}</span>
-                                        </div>
-                                    </div>
-                                @endif
-                            @endforeach
-                        @endif
-                        <div class="row total-header-section">
-                            <div class="col-lg-3 col-sm-3 col-3">
-                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                <span class="badge badge-pill badge-danger">
-                                    @if (session('cart'))
-                                        {{ sizeof(session()->get('cart')) }}
-                                    @else
-                                        0
-                                    @endif
-                                </span>
-                            </div>
-                            <div class="col-lg-9 col-sm-9 col-9 total-section text-right">
-                                <p>Total: <span class="text-info">{{ $totalakhir }}</span></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-12 col-sm-12 col-12 text-center checkout">
-                                <a href="{{ url('cart') }}" class="btn btn-primary btn-block">View all</a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="container page">
-        @yield('content')
+
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12 col-12 main-section">
+                        <h1 class="text-center">Tabel Perbandingan</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-5 col-sm-5 col-5">
+
+                        <div class="col-sm-12">
+                            <select name="category_id" id="category_id" class="form-control" required>
+                                <option disabled selected>select category</option>
+                                @foreach ($products as $item)
+                                    <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-sm-2 col-2">
+                        
+                    </div>
+                    <div class="col-lg-5 col-sm-5 col-5">
+                        <div class="col-sm-12">
+                            <select name="category_id" id="category_id" class="form-control" required>
+                                <option disabled selected>select category</option>
+                                @foreach ($products as $item)
+                                    <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-5 col-sm-5 col-5">
+                        <div class="row">
+                            <div class="col-12">
+                                <p class="text-center"></p>
+                            </div>
+                            @foreach ($products as $item)
+                                <div class="col-12">
+                                    <p class="text-center">spesifikasi produk 1</p>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-sm-2 col-2">
+                        <div class="row">
+                            <div class="col-12">
+                                <p class="text-center"></p>
+                            </div>
+                            @foreach ($products as $item)
+                                <div class="col-12">
+                                    <p class="text-center">info</p>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-sm-5 col-5">
+                        <div class="row">
+                            <div class="col-12">
+                                <p class="text-center"></p>
+                            </div>
+                            @foreach ($products as $item)
+                                <div class="col-12">
+                                    <p class="text-center">spesifikasi produk 2</p>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 

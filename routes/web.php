@@ -74,6 +74,7 @@ Route::get('add-cart/{id}', 'ProductController@addCartDetail')->name('addCart');
 Route::get('cart', 'ProductController@cart');
 Route::get('submitcheckout', 'TransactionController@submitcheckout')->name('submitcheckout');
 Route::get('/showdetail/{product}', 'ProductController@showDetailFrontEnd')->name('detailfrontend');
+Route::get('/compare', 'ProductController@compareProduct')->name('compareProduct');
 
 Auth::routes();
 

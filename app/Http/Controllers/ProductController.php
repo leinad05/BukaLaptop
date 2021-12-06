@@ -230,4 +230,10 @@ class ProductController extends Controller
         session()->put('cart', $cart);
         return redirect()->route('katalog')->with('status', 'Product added to cart successfully!');
     }
+
+    public function compareProduct(){
+        $this->authorize('cart-permission-product');
+        $products = Product::all();
+        return view('frontend.compare', compact('products'));
+    }
 }
