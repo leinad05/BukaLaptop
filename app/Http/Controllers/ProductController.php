@@ -234,6 +234,11 @@ class ProductController extends Controller
     public function compareProduct(){
         $this->authorize('cart-permission-product');
         $products = Product::all();
-        return view('frontend.compare', compact('products'));
+        
+        $products_spec = Product::find(1);
+
+        $categories = Category::all();
+        $brands = Brand::all();
+        return view('frontend.compare', compact('categories','brands','products', 'products_spec'));
     }
 }

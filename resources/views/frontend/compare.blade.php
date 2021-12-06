@@ -62,8 +62,9 @@
                                         Kembali ke dashboard
                                     </a>
 
-                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                                 document.getElementById('logout-form').submit();">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                                             document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -109,7 +110,7 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-lg-12 col-sm-12 col-12 main-section">
-                        <h1 class="text-center">Tabel Perbandingan</h1>
+                        <h3 class="text-center">Tabel Perbandingan</h3>
                     </div>
                 </div>
             </div>
@@ -127,7 +128,7 @@
                         </div>
                     </div>
                     <div class="col-lg-2 col-sm-2 col-2">
-                        
+
                     </div>
                     <div class="col-lg-5 col-sm-5 col-5">
                         <div class="col-sm-12">
@@ -141,14 +142,29 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-5 col-sm-5 col-5">
+                    {{-- <div class="col-lg-5 col-sm-5 col-5">
                         <div class="row">
                             <div class="col-12">
                                 <p class="text-center"></p>
                             </div>
+                            <div class="col-12">
+                                <p class="text-center">(Gambar produk 1)</p>
+                            </div>
+                            <div class="col-12">
+                                <p class="text-center">(id produk)</p>
+                            </div>
+                            <div class="col-12">
+                                <p class="text-center">(nama produk)</p>
+                            </div>
+                            <div class="col-12">
+                                <p class="text-center">(deskripsi produk)</p>
+                            </div>
+                            <div class="col-12">
+                                <p class="text-center">(harga produk)</p>
+                            </div>
                             @foreach ($products as $item)
                                 <div class="col-12">
-                                    <p class="text-center">spesifikasi produk 1</p>
+                                    <p class="text-center">(spek lain)</p>
                                 </div>
                             @endforeach
                         </div>
@@ -157,6 +173,21 @@
                         <div class="row">
                             <div class="col-12">
                                 <p class="text-center"></p>
+                            </div>
+                            <div class="col-12">
+                                <p class="text-center">(Gambar)</p>
+                            </div>
+                            <div class="col-12">
+                                <p class="text-center">(id)</p>
+                            </div>
+                            <div class="col-12">
+                                <p class="text-center">(nama)</p>
+                            </div>
+                            <div class="col-12">
+                                <p class="text-center">(deskripsi)</p>
+                            </div>
+                            <div class="col-12">
+                                <p class="text-center">(harga)</p>
                             </div>
                             @foreach ($products as $item)
                                 <div class="col-12">
@@ -170,12 +201,77 @@
                             <div class="col-12">
                                 <p class="text-center"></p>
                             </div>
+                            <div class="col-12">
+                                <p class="text-center">(Gambar produk 1)</p>
+                            </div>
+                            <div class="col-12">
+                                <p class="text-center">(id produk)</p>
+                            </div>
+                            <div class="col-12">
+                                <p class="text-center">(nama produk)</p>
+                            </div>
+                            <div class="col-12">
+                                <p class="text-center">(deskripsi produk)</p>
+                            </div>
+                            <div class="col-12">
+                                <p class="text-center">(harga produk)</p>
+                            </div>
                             @foreach ($products as $item)
                                 <div class="col-12">
-                                    <p class="text-center">spesifikasi produk 2</p>
+                                    <p class="text-center">(spek lain)</p>
                                 </div>
                             @endforeach
                         </div>
+                    </div> --}}
+
+                    <div class="col-lg-5 col-sm-5 col-5">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($products_spec->specifications as $s)
+                                    <tr>
+                                        <td class="text-center" id="p1_spec_{{ $loop->iteration }}">
+                                            {{ $s->nama }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-lg-2 col-sm-2 col-2">
+                        <table class="table table-borderless">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="text-center">keterangan</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($products_spec->specifications as $s)
+                                    <tr>
+                                        <td class="text-center">{{ $s->nama }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-lg-5 col-sm-5 col-5">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($products_spec->specifications as $s)
+                                    <tr>
+                                        <td class="text-center">{{ $s->nama }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -184,7 +280,18 @@
 
 
     @yield('scripts')
-
+    <script>
+        function getDataFirstEdit(id) {
+            $.ajax({
+                type: 'GET',
+                url: '{{ route('products.getEditFormOnly') }}',
+                data: 'id=' + id,
+                success: function(data) {
+                    $("#msgFormEdit").html(data.msg);
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>
