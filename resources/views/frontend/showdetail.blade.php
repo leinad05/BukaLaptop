@@ -72,9 +72,32 @@
                     <div class="col-lg-7 col-md-7 col-sm-6">
                         <h4 class="box-title mt-5">Product Description</h4>
                         <p>{{ $product->deskripsi }}</p>
-                        <h2 class="mt-5">
-                            Rp. {{ $product->harga }}
-                        </h2>
+                        <?php
+                            $role = Auth::user();
+                            if($role != "")
+                            {
+                                $harga = "Rp. " . number_format($product->harga,2,',','.');
+                            }
+                            else
+                            {
+                                $angka = $product->harga;
+                                $length = strlen($angka);
+
+                                if($length == 7) 
+                                {
+                                    $num = substr($angka, 0, 1);
+                                    $ganti = str_pad($num,11,".xxx.xxx,-");
+                                    $harga = "Rp. " . $ganti ;
+                                }
+                                else
+                                {
+                                    $num = substr($angka, 0, 2);
+                                    $ganti = str_pad($num,12,".xxx.xxx,-");
+                                    $harga = "Rp. " . $ganti ;
+                                }
+                            }
+                        ?>
+                        <h2 class="mt-5"> {{ $harga }} </h2>
                         <a href="{{ url('add-cart/' . $product->id) }}" class="btn btn-dark btn-rounded mr-1" role="button">
                             <i class="fa fa-shopping-cart"></i>
                         </a>
