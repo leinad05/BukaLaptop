@@ -41,6 +41,8 @@ Route::middleware(['auth'])->group(function(){
 
     Route::resource('hr', 'HrController');
     Route::post('hr/getDataFirst/', 'HrController@getDataFirst')->name('hr.getDataFirst');
+    Route::post('hr/getResetPassword/', 'HrController@getResetPassword')->name('hr.getResetPassword');
+    Route::post('hr/simpan_reset_password_hr/', 'HrController@simpan_reset_password_hr')->name('hr.simpan_reset_password_hr');
     Route::post('hr/simpan_edit_hr/', 'HrController@simpan_edit_hr')->name('hr.simpan_edit_hr');
     Route::post('hr/delete_data_hr_ajax/', 'HrController@delete_data_hr_ajax')->name('hr.delete_data_hr_ajax');
     Route::get('hr/suspend_data_hr_ajax/{id}', 'HrController@suspend_data_hr_ajax')->name('hr.suspend_data_hr_ajax');
