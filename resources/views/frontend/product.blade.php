@@ -19,7 +19,34 @@
                     <div class="caption">
                         <h4>{{ $product->nama }}</h4>
                         <p>{{ Str::limit($product->deskripsi, 50) }}</p>
-                        <p><strong>Price: </strong>Rp.{{ $product->harga }}</p>
+
+                        <?php
+                            $role = Auth::user()->sebagai;
+                            if($role == "employee" || $role == "member" || $role == "owner") 
+                            {
+                                $harga = "Rp. " . number_format($product->harga,2,',','.');
+                            }
+                            else
+                            {
+                                $angka = $product->harga;
+                                $length = strlen($angka);
+
+                                if($length == 7) 
+                                {
+                                    $num = substr($angka, 0, 1);
+                                    $ganti = str_pad($num,11,".xxx.xxx,-");
+                                    $harga = "Rp. " . $ganti ;
+                                }
+                                else
+                                {
+                                    $num = substr($angka, 0, 2);
+                                    $ganti = str_pad($num,12,".xxx.xxx,-");
+                                    $harga = "Rp. " . $ganti ;
+                                }
+                            }
+                        ?>
+
+                        <p><strong>Price: </strong>{{ $harga }}</p>
                         <a href="{{ url('showdetail/' . $product->id) }}">Detail Spesifikasi</a>
                         @can('cart-permission-product', $product)
                         <p class="btn-holder">
