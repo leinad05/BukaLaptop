@@ -45,7 +45,7 @@ class HrController extends Controller
             [
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => $request->password,
+                'password' => Hash::make($request->password),
                 'sebagai' => 'employee',
                 'status' => 'active'
             ]

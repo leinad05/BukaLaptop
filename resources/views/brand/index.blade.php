@@ -144,7 +144,7 @@
                         if (data.status == 'sukses') {
                             $('#tr_' + id_brand).remove();
                         }
-                        // alert(data.msg);
+                        alert(data.msg);
                     }
                 );
             }

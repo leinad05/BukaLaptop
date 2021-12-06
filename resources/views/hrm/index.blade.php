@@ -54,26 +54,28 @@
                                     <td class="text-right">
 
                                         @if ($e->status != 'active')
-                                            <a id="data_button_{{ $e->id }}" href="{{ url('hr/suspend_data_hr_ajax/' . $e->id) }}"
+                                            <a id="data_button_{{ $e->id }}"
+                                                href="{{ url('hr/suspend_data_hr_ajax/' . $e->id) }}"
                                                 class="btn btn-sm btn-secondary"> &nbsp;Allow &nbsp; </a>
                                         @else
-                                            <a id="data_button_{{ $e->id }}" href="{{ url('hr/suspend_data_hr_ajax/' . $e->id) }}"
+                                            <a id="data_button_{{ $e->id }}"
+                                                href="{{ url('hr/suspend_data_hr_ajax/' . $e->id) }}"
                                                 class="btn btn-sm btn-secondary">Suspend</a>
                                         @endif
 
 
                                         <a href="#modal_edit_employee" class="btn btn-sm btn-warning" data-toggle="modal"
                                             onclick="getDataFirst({{ $e->id }})">Edit</a>
-                                        
+
                                         <!--bagian reset pass-->
                                         <a href="#modal_edit_employee" class="btn btn-sm btn-warning" data-toggle="modal"
                                             onclick="resetPassword({{ $e->id }})">Reset Password</a>
 
-                                        
-                                        {{-- @can('delete-permission', $e) --}}
-                                        <button type="button" class="btn btn-sm btn-danger"
-                                            onclick="delete_data_hr_ajax({{ $e->id, $e->status }})">Delete</button>
-                                        {{-- @endcan --}}
+
+                                        @can('access-permission-HR')
+                                            <button type="button" class="btn btn-sm btn-danger"
+                                                onclick="delete_data_hr_ajax({{ $e->id, $e->status }})">Delete</button>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach

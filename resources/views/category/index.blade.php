@@ -144,7 +144,7 @@
                         if (data.status == 'oke') {
                             $('#tr_' + id_category).remove();
                         }
-                        // alert(data.msg);
+                        alert(data.msg);
                     }
                 );
             }

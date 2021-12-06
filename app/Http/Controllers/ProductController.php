@@ -149,6 +149,7 @@ class ProductController extends Controller
     {
         $this->authorize('access-permission-product');
         $product->delete();
+        DB::table('product_specification')->where('product_id', '=', $product->id)->delete();
         return redirect()->route('products.index')->with('status','Successfully deleted');
     }
 
