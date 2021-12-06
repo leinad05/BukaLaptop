@@ -109,17 +109,41 @@ class HrController extends Controller
         ),200);
     }
 
+    public function getResetPassword(Request $request){
+        $this->authorize('access-permission-HR');
+        $id = $request->id_user;
+        $employee = User::find($id);
+
+        return response()->json(array(
+            'status' => 'oke',
+            'msg'=>view('hrm.resetformmodal', compact('employee'))->render()
+        ),200);
+    }
+
     public function simpan_edit_hr(Request $request){
         $this->authorize('access-permission-HR');
         $id = $request->id_user;
         $name = $request->name;
         $email = $request->email;
-        $password = $request->password;
 
         $employee = User::find($id);
         $employee->name = $name;
         $employee->email = $email;
-        $employee->password = $password;
+        $employee->save();
+
+        return response()->json(array(
+            'status' => 'sukses',
+            'msg'=> 'Successfully edit employee data'
+        ),200);
+    }
+
+    public function simpan_reset_password_hr(Request $request){
+        $this->authorize('access-permission-HR');
+        $id = $request->id_user;
+        $password = $request->password;
+
+        $employee = User::find($id);
+        $employee->password = Hash::make($password);
         $employee->save();
 
         return response()->json(array(

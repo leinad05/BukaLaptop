@@ -62,9 +62,14 @@
                                         @endif
 
 
-
                                         <a href="#modal_edit_employee" class="btn btn-sm btn-warning" data-toggle="modal"
                                             onclick="getDataFirst({{ $e->id }})">Edit</a>
+                                        
+                                        <!--bagian reset pass-->
+                                        <a href="#modal_edit_employee" class="btn btn-sm btn-warning" data-toggle="modal"
+                                            onclick="resetPassword({{ $e->id }})">Reset Password</a>
+
+                                        
                                         {{-- @can('delete-permission', $e) --}}
                                         <button type="button" class="btn btn-sm btn-danger"
                                             onclick="delete_data_hr_ajax({{ $e->id, $e->status }})">Delete</button>
@@ -150,6 +155,23 @@
         function getDataFirst(id_user) {
             $('#isi_modal_edit_employee').html('loading...');
             $.post('{{ route('hr.getDataFirst') }}', {
+                    _token: "<?php echo csrf_token(); ?>",
+                    id_user: id_user
+                },
+                function(data) {
+                    if (data.status == 'oke') {
+                        $('#isi_modal_edit_employee').html(data.msg);
+                    } else {
+                        $('#isi_modal_edit_employee').html('Failed to load data');
+                    }
+                }
+            );
+
+        }
+
+        function resetPassword(id_user) {
+            $('#isi_modal_edit_employee').html('loading...');
+            $.post('{{ route('hr.getResetPassword') }}', {
                     _token: "<?php echo csrf_token(); ?>",
                     id_user: id_user
                 },
