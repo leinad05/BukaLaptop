@@ -58,10 +58,12 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    @can('access-permission-product')
                                     <a class="dropdown-item" href="{{ route('products.index') }}">
                                         Kembali ke dashboard
                                     </a>
-                                    
+                                    @endcan
+
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}

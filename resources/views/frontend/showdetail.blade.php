@@ -21,7 +21,7 @@
             word-wrap: break-word;
             background-color: #fff;
             background-clip: border-box;
-            border: 0 solid transparent;
+            border: 0px solid transparent;
             border-radius: 0;
         }
         .card .card-subtitle {
@@ -108,8 +108,31 @@
                 </div>
             </div>
         </nav>
+        <div class="row">
+            <div class="col-lg-2 col-sm-2 col-2 main-section">
+                @can('cart-permission-product')
+                    <a class="btn btn-secondary" href="{{ route('compareProduct') }}" role="button">Bandingkan Produk</a>
+                @endcan
+            </div>
+            <div class="col-lg-10 col-sm-10 col-10 main-section">
+                <div class="dropdown">
+                    @can('cart-permission-product')
+                        <button type="button" class="btn btn-info" data-toggle="dropdown">
+                            <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart
+                            <span class="badge badge-pill badge-danger">
+                                @if (session('cart'))
+                                    {{ sizeof(session()->get('cart')) }}
+                                @else
+                                    0
+                                @endif
+                            </span>
+                        </button>
+                    @endcan
+                </div>
+            </div>
+        </div>
 
-        <div class="card">
+        <div class="card" style="border-color: #fff">
             <div class="card-body">
                 <a href="/"><i class="fa fa-arrow-left" style="color: black"></i></a>
                 <h3 class="card-title" style="text-align: center">{{ $product->nama }}</h3> <br>
