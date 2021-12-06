@@ -100,7 +100,7 @@
                             <select name="category_id" id="category_id" class="form-control" required>
                                 <option disabled selected>select category</option>
                                 @foreach ($products as $item)
-                                    <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                    <option value="{{ $item->id }}" onclick="getData({{ $item->id }}, 1)">{{ $item->nama }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -113,7 +113,7 @@
                             <select name="category_id" id="category_id" class="form-control" required>
                                 <option disabled selected>select category</option>
                                 @foreach ($products as $item)
-                                    <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                    <option value="{{ $item->id }}" onclick="getData({{ $item->id }}, 2)">{{ $item->nama }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -245,7 +245,8 @@
                             <tbody>
                                 @foreach ($products_spec->specifications as $s)
                                     <tr>
-                                        <td class="text-center">{{ $s->nama }}</td>
+                                        <td class="text-center" id="p2_spec_{{ $loop->iteration }}">
+                                            {{ $s->nama }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -268,6 +269,25 @@
                     $("#msgFormEdit").html(data.msg);
                 }
             });
+        }
+
+        function getData(id, compare){
+            $.ajax({
+                type: 'GET',
+                url: '{{ route('products.getCompareData') }}',
+                data: 'id=' + id,
+                success: function(data) {
+                    $('#p'+ compare +'_spec_'+ 1).html(data.data[0]);
+                    $('#p'+ compare +'_spec_'+ 2).html(data.data[1]);
+                    $('#p'+ compare +'_spec_'+ 3).html(data.data[2]);
+                    $('#p'+ compare +'_spec_'+ 4).html(data.data[3]);
+                    $('#p'+ compare +'_spec_'+ 5).html(data.data[4]);
+                    $('#p'+ compare +'_spec_'+ 6).html(data.data[5]);
+                    $('#p'+ compare +'_spec_'+ 7).html(data.data[6]);
+                    $('#p'+ compare +'_spec_'+ 8).html(data.data[7]);
+                    $('#p'+ compare +'_spec_'+ 9).html(data.data[8]);
+                }
+            })
         }
     </script>
 </body>

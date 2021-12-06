@@ -241,4 +241,19 @@ class ProductController extends Controller
         $brands = Brand::all();
         return view('frontend.compare', compact('categories','brands','products', 'products_spec'));
     }
+
+    
+    public function getCompareData(Request $request)
+    {
+        $this->authorize('access-permission-product');
+        $id = $request->get('id');
+        $product = Product::find($id);
+        $arrayData = array();
+        foreach ($product->specifications as $s) {
+            $arrayData[] = $s->pivot->keterangan;
+        }
+        
+        return response()->json(array(
+            'msg'=> 'ok', 'data' => $arrayData),200);
+    }
 }

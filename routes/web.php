@@ -22,6 +22,8 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('products', 'ProductController');
     Route::get('product/getEditFormOnly/', 'ProductController@getEditFormOnly')->name('products.getEditFormOnly');
     Route::put('product/{product}', 'ProductController@update2')->name('products.update2');
+    Route::get('product/getCompareData', 'ProductController@getCompareData')->name('products.getCompareData');
+    //getCompareData
     //Route::get('product/getEditFormOnly', 'ProductController@getEditFormOnly')->name('products.getEditFormOnly');
 
     Route::resource('categories', 'CategoryController');
