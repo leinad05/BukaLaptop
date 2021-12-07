@@ -35,7 +35,7 @@
                                         <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td class="text-center">
-                                                <img src="https://via.placeholder.com/50" alt="untuk coba modal">
+                                                <img src="{{ asset('img/' . $dp->foto) }}" width="100" height="100">
                                             </td>
                                             <td class="budget text-center">
                                                 {{ $dp->nama }}
@@ -43,17 +43,22 @@
                                             <td class="budget text-center">
                                                 {{ $dp->id }}
                                             </td>
+                                            <?php
+                                                $harga = "Rp. " . number_format($dp->pivot->harga,2,',','.');
+                                                $total = "Rp. " . number_format($dp->pivot->quantity*$dp->pivot->harga,2,',','.');
+                                            ?>
                                             <td class="text-center">
-                                                Rp {{ $dp->pivot->harga }}
+                                                {{ $harga }}
                                             </td>
                                             <td class="text-center">
                                                 {{ $dp->pivot->quantity }}
                                             </td>
                                             <td class="text-center">
-                                                Rp. {{ $dp->pivot->quantity * $dp->pivot->harga }}
+                                                {{ $total }}
                                             </td>
                                             @php
                                                 $grandtotal += $dp->pivot->quantity * $dp->pivot->harga;
+                                                $grand = "Rp. " . number_format($grandtotal,2,',','.');
                                             @endphp
                                         </tr>
                                     @endforeach
@@ -67,7 +72,7 @@
                                             <h4>GrandTotal:</h4>
                                         </td>
                                         <td class="text-center">
-                                            <h4>Rp. {{ $grandtotal }}</h4>
+                                            <h4>{{ $grand }}</h4>
                                         </td>
                                     </tr>
                                 </tbody>

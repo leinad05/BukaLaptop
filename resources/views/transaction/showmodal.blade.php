@@ -18,17 +18,19 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-5">
-                                        {{-- <img src="{{ asset('assets/images/' . $dp->image . '.jpg') }}" width="150" height="150"> --}}
-                                        <img src="https://via.placeholder.com/150" alt="untuk coba modal">
-
+                                        <img src="{{ asset('img/' . $dp->foto) }}" width="150" height="150">
                                     </div>
                                     <div class="col align-self-center">
                                         {{-- bug kena soft delete --}}
                                         {{-- <b>Category: </b> {{ $dp->category->nama_kategori }} <br> --}}
 
-                                        <b>Price: </b> Rp {{ $dp->pivot->harga }} <br>
+                                        <?php
+                                            $harga = "Rp. " . number_format($dp->pivot->harga,2,',','.');
+                                            $total = "Rp. " . number_format($dp->pivot->quantity*$dp->pivot->harga,2,',','.');
+                                        ?>
+                                        <b>Price: </b> {{ $harga }} <br>
                                         <b>Quantity: </b> {{ $dp->pivot->quantity }} <br>
-                                        <b>Total: </b> {{ $dp->pivot->quantity*$dp->pivot->harga }} <br>
+                                        <b>Total: </b> {{ $total }} <br>
                                     </div>
                                 </div>
                             </div>

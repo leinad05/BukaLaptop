@@ -63,7 +63,10 @@
                         <td id="data_nama_{{ $p->id }}">{{ $p->nama }}</td>
                         <td id="data_deskripsi_{{ $p->id }}">{{ $p->deskripsi }}</td>
                         <td id="data_stok_{{ $p->id }}">{{ $p->stok }}</td>
-                        <td id="data_harga_{{ $p->id }}">{{ $p->harga }}</td>
+                        <?php
+                          $harga = "Rp. " . number_format($p->harga,2,',','.');
+                        ?>
+                        <td id="data_harga_{{ $p->id }}">{{ $harga }}</td>
                         <td id="data_rilis_{{ $p->id }}">{{ $p->tahun_rilis }}</td>
                         <td id="data_foto_{{ $p->id }}">{{ $p->foto }}</td>
 

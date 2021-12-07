@@ -55,7 +55,7 @@
                             <select name="brand_id" id="brand_id" class="form-control" required>
                                 <option disabled selected>select brand</option>
                                 @foreach ($brands as $item)
-                                @if($item->id == $product->category->id)
+                                @if($item->id == $product->brand->id)
                                     <option value="{{ $item->id }}" selected>{{ $item->nama_brand }}</option>
                                 @else
                                     <option value="{{ $item->id }}">{{ $item->nama_brand }}</option>

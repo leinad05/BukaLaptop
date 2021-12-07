@@ -4,7 +4,8 @@
         <!-- Brand -->
         <div class="sidenav-header  align-items-center">
             <a class="navbar-brand" href="javascript:void(0)">
-                <img src="{{ asset('../assets/img/brand/blue.png') }}" class="navbar-brand-img" alt="...">
+                {{-- <img src="{{ asset('../assets/img/brand/blue.png') }}" class="navbar-brand-img" alt="..."> --}}
+                <h1>Buka Laptop</h1>
             </a>
         </div>
         <div class="navbar-inner">
