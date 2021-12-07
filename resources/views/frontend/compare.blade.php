@@ -119,89 +119,24 @@
                         </div>
                     </div>
                 </div>
+                <br>
                 <div class="row">
-                    {{-- <div class="col-lg-5 col-sm-5 col-5">
-                        <div class="row">
-                            <div class="col-12">
-                                <p class="text-center"></p>
-                            </div>
-                            <div class="col-12">
-                                <p class="text-center">(Gambar produk 1)</p>
-                            </div>
-                            <div class="col-12">
-                                <p class="text-center">(id produk)</p>
-                            </div>
-                            <div class="col-12">
-                                <p class="text-center">(nama produk)</p>
-                            </div>
-                            <div class="col-12">
-                                <p class="text-center">(deskripsi produk)</p>
-                            </div>
-                            <div class="col-12">
-                                <p class="text-center">(harga produk)</p>
-                            </div>
-                            @foreach ($products as $item)
-                                <div class="col-12">
-                                    <p class="text-center">(spek lain)</p>
-                                </div>
-                            @endforeach
+                    <div class="col-lg-5 col-sm-5 col-5">
+                        <div class="col-sm-12 text-center">
+                            <img src="https://via.placeholder.com/200x150?text=Image1" alt="" id="p1_foto" width="200" height="150">
                         </div>
                     </div>
-                    <div class="col-lg-2 col-sm-2 col-2">
-                        <div class="row">
-                            <div class="col-12">
-                                <p class="text-center"></p>
-                            </div>
-                            <div class="col-12">
-                                <p class="text-center">(Gambar)</p>
-                            </div>
-                            <div class="col-12">
-                                <p class="text-center">(id)</p>
-                            </div>
-                            <div class="col-12">
-                                <p class="text-center">(nama)</p>
-                            </div>
-                            <div class="col-12">
-                                <p class="text-center">(deskripsi)</p>
-                            </div>
-                            <div class="col-12">
-                                <p class="text-center">(harga)</p>
-                            </div>
-                            @foreach ($products as $item)
-                                <div class="col-12">
-                                    <p class="text-center">info</p>
-                                </div>
-                            @endforeach
-                        </div>
+                    <div class="col-lg-2 col-sm-2 col-2 text-center">
                     </div>
                     <div class="col-lg-5 col-sm-5 col-5">
-                        <div class="row">
-                            <div class="col-12">
-                                <p class="text-center"></p>
+                        <div class="col-sm-12">
+                            <div class="col-sm-12 text-center">
+                                <img src="https://via.placeholder.com/200x150?text=Image2" alt="" id="p2_foto" width="200" height="150">
                             </div>
-                            <div class="col-12">
-                                <p class="text-center">(Gambar produk 1)</p>
-                            </div>
-                            <div class="col-12">
-                                <p class="text-center">(id produk)</p>
-                            </div>
-                            <div class="col-12">
-                                <p class="text-center">(nama produk)</p>
-                            </div>
-                            <div class="col-12">
-                                <p class="text-center">(deskripsi produk)</p>
-                            </div>
-                            <div class="col-12">
-                                <p class="text-center">(harga produk)</p>
-                            </div>
-                            @foreach ($products as $item)
-                                <div class="col-12">
-                                    <p class="text-center">(spek lain)</p>
-                                </div>
-                            @endforeach
                         </div>
-                    </div> --}}
-
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-lg-5 col-sm-5 col-5">
                         <table class="table table-borderless">
                             <thead>
@@ -210,12 +145,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($products_spec->specifications as $s)
+                                <tr>
+                                    <td id="p1_harga" class="text-center">-</td>
+                                </tr>
+                                @for ($i = 1; $i <=9; $i++)
                                     <tr>
-                                        <td class="text-center" id="p1_spec_{{ $loop->iteration }}">
-                                            {{ $s->nama }}</td>
+                                        <td class="text-center" id="p1_spec_{{ $i }}">-</td>
                                     </tr>
-                                @endforeach
+                                @endfor
                             </tbody>
                         </table>
                     </div>
@@ -223,15 +160,40 @@
                         <table class="table table-borderless">
                             <thead>
                                 <tr>
-                                    <th scope="col" class="text-center">keterangan</th>
+                                    <th scope="col" class="text-center">Keterangan</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($products_spec->specifications as $s)
-                                    <tr>
-                                        <td class="text-center">{{ $s->nama }}</td>
-                                    </tr>
-                                @endforeach
+                                <tr>
+                                    <td class="text-center">Harga</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">Size</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">Resolution</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">RAM</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">Processor</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">OS</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">VGA</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">Storage</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">Weight</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">Battery</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -243,16 +205,19 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($products_spec->specifications as $s)
+                                <tr>
+                                    <td id="p2_harga" class="text-center">-</td>
+                                </tr>
+                                @for ($i = 1; $i <=9; $i++)
                                     <tr>
-                                        <td class="text-center" id="p2_spec_{{ $loop->iteration }}">
-                                            {{ $s->nama }}</td>
+                                        <td class="text-center" id="p2_spec_{{ $i }}">-</td>
                                     </tr>
-                                @endforeach
+                                @endfor
                             </tbody>
                         </table>
                     </div>
                 </div>
+                <a href="/" class="btn btn-info">Back</a>
             </div>
         </div>
     </div>
@@ -277,6 +242,8 @@
                 url: '{{ route('products.getCompareData') }}',
                 data: 'id=' + id,
                 success: function(data) {
+                    $('#p'+ compare +'_foto').attr("src", "img/"+data.product[0]);
+                    $('#p'+ compare +'_harga').html(data.product[1]);
                     $('#p'+ compare +'_spec_'+ 1).html(data.data[0]);
                     $('#p'+ compare +'_spec_'+ 2).html(data.data[1]);
                     $('#p'+ compare +'_spec_'+ 3).html(data.data[2]);

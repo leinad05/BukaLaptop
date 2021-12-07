@@ -129,7 +129,7 @@ class CategoryController extends Controller
                 'msg'=> 'Successfully delete category data'
             ),200);
         } catch (\PDOException $e) {
-            $msg = "Failed to delete data";
+            $msg = "Failed to delete data, make sure there is no laptop in this category!";
 
             return response()->json(array(
                 'status' => 'error',

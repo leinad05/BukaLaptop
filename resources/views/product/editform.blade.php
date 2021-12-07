@@ -35,12 +35,6 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="image" class="col-sm-3 col-form-label">Image</label><br>
-                        <div class="col-sm-10">
-                            <input type="text" name="image" class="form-control" id="image" placeholder="11" disabled value = "{{ $product->foto }}">
-                        </div>
-                    </div>
-                    <div class="form-group row">
                         <label for="kategori" class="col-sm-3 col-form-label">Category</label>
                         <div class="col-sm-10">
                             <select name="category_id" id="category_id" class="form-control" required>

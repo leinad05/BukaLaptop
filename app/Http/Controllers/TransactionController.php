@@ -118,7 +118,7 @@ class TransactionController extends Controller
 
         $t = new Transaction;
         $t->user_id = $user->id;
-        // $t->user_id = 1;
+        $t->status = "On Process";
         $t->tanggal_transaksi = Carbon::now()->toDateTimeString();
         $t->tanggal_transaksi = date('Y-m-d');
         $t->save();
@@ -136,6 +136,6 @@ class TransactionController extends Controller
         // $transaction = Transaction::find($id);
         $transaction->status = "Accepted";
         $transaction->save();
-        return redirect()->route('transactions.index')->with('status','successfully acc');
+        return redirect()->route('transactions.index')->with('status','Successfully Accept Transaction!');
     }
 }

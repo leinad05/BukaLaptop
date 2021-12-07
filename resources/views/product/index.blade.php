@@ -75,7 +75,8 @@
                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                               <a class="dropdown-item" href="{{ url('products/' . $p->id) }}">Detail</a>
                               <a class="dropdown-item" data-toggle="modal" href="#editModals"
-                              onclick="getDataFirstEdit({{ $p->id }})">Edit</a>
+                              onclick="getDataFirstEdit({{ $p->id }})">Edit Data</a>
+                              <a class="dropdown-item" data-toggle="modal" href="#modal_edit_logo_{{ $p->id }}">Edit Image</a>
                               {{-- @can('delete-permission', $p) --}}
                               <form method = "POST" action = "{{ route('products.destroy', $p->id) }}">
                                 @method('DELETE')
@@ -87,6 +88,37 @@
                           </div>
                         </td>
                     </tr>
+
+                    <div class="modal fade" id="modal_edit_logo_{{ $p->id }}" tabindex="-1" role="basic" aria-hidden="true">
+                      <div class="modal-dialog">
+                          <div class="modal-content">
+                              <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                  <h4 class="modal-title">
+                                      Edit Image
+                                  </h4>
+                              </div>
+                              <form enctype="multipart/form-data" action="{{ route('products.changeImage') }}" method="POST">
+                              @csrf
+                                  <div class="modal-body">
+                                      <div class="form-group row">
+                                          <label for="nama" class="col-sm-2 col-form-label">Image</label>
+                                          <div class="col-sm-10">
+                                            <input type="file" class="form-control" name="logo" id="logo" placeholder="logo">
+                                          </div>
+                                          <input type="hidden" name="id" value="{{ $p->id }}">
+                                      </div>
+                                  </div>
+                                  <div class="modal-footer">
+                                      <button type="submit" class="btn btn-primary">Save</button>
+                                      <button type="button" class="btn btn-default" onclick="$('.modal').modal('hide');">Cancel</button>
+                                  </div>
+                              </form>
+                          </div>
+                          <!-- /.modal-content -->
+                      </div>
+                      <!-- /.modal-dialog -->
+                  </div>
                 @endforeach
             </tbody>
         </table>

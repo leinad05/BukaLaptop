@@ -42,7 +42,7 @@ class BrandController extends Controller
         $new_brand = new Brand();
         $new_brand->nama_brand = $request->name;
         $new_brand->save();
-        return redirect('brands')->with('sukses', 'Successfully add employee data');
+        return redirect('brands')->with('sukses', 'Successfully add brand data');
     }
 
     /**
@@ -129,7 +129,7 @@ class BrandController extends Controller
                 'msg'=> 'Successfully delete brand data'
             ),200);
         } catch (\PDOException $e) {
-            $msg = "Failed to delete data";
+            $msg = "Failed to delete data, make sure there is no laptop in this brand!";
 
             return response()->json(array(
                 'status' => 'error',

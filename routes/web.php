@@ -23,6 +23,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('product/getEditFormOnly/', 'ProductController@getEditFormOnly')->name('products.getEditFormOnly');
     Route::put('product/{product}', 'ProductController@update2')->name('products.update2');
     Route::get('product/getCompareData', 'ProductController@getCompareData')->name('products.getCompareData');
+    Route::post('products/changeImage/', 'ProductController@changeImage')->name('products.changeImage');
     //getCompareData
     //Route::get('product/getEditFormOnly', 'ProductController@getEditFormOnly')->name('products.getEditFormOnly');
 

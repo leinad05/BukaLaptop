@@ -46,6 +46,11 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $this->authorize('access-permission-product');
+        $file = $request->file('logo');
+        $imgFolder = 'img';
+        $imgFile = time() . '_' . $file->getClientOriginalName();
+        $file->move($imgFolder, $imgFile);
+
         $new_product = new Product();
         $new_product->nama = $request->name;
         $new_product->harga = $request->harga;
@@ -54,11 +59,10 @@ class ProductController extends Controller
         $new_product->tahun_rilis = $request->releaseyear;
         $new_product->category_id = $request->category_id;
         $new_product->brand_id = $request->brand_id;
-        // $new_product->foto = $request->image;
-        $new_product->foto = 11;
+        $new_product->foto = $imgFile;
         $new_product->save();
 
-        for ($i=1; $i < 9; $i++) { 
+        for ($i=1; $i <= 9; $i++) { 
             DB::table('product_specification')->insert([
                 'product_id' => $new_product->id,
                 'specification_id' => $i
@@ -118,7 +122,6 @@ class ProductController extends Controller
         $product->category_id = $request->get('category_id');
         $product->deskripsi = $request->get('description');
         $product->tahun_rilis = $request->get('releaseyear');
-        $product->foto = "11";
         $product->brand_id = $request->get('brand_id');
         $product->save();
         return redirect()->route('products.index')->with('status','Data successfully changed');
@@ -193,7 +196,7 @@ class ProductController extends Controller
                 'name' => $product->nama,
                 'quantity' => 1,
                 'price' => $product->harga,
-                'photo' => $product->image
+                'photo' => $product->foto
             ];
         }
         else 
@@ -220,7 +223,7 @@ class ProductController extends Controller
                 'name' => $product->nama,
                 'quantity' => 1,
                 'price' => $product->harga,
-                'photo' => $product->image
+                'photo' => $product->foto
             ];
         }
         else 
@@ -249,11 +252,30 @@ class ProductController extends Controller
         $id = $request->get('id');
         $product = Product::find($id);
         $arrayData = array();
+        $arrayProduct = array();
+        $arrayProduct[0] = $product->foto;
+        $harga = "Rp. " . number_format($product->harga,2,',','.');
+        $arrayProduct[1] = $harga;
         foreach ($product->specifications as $s) {
             $arrayData[] = $s->pivot->keterangan;
         }
         
         return response()->json(array(
-            'msg'=> 'ok', 'data' => $arrayData),200);
+            'msg'=> 'ok', 'data' => $arrayData, 'product' => $arrayProduct),200);
+    }
+
+    public function changeImage(Request $request)
+    {
+        $id = $request->id;
+        $file = $request->file('logo');
+        $imgFolder = 'img';
+        $imgFile = time() . '_' . $file->getClientOriginalName();
+        $file->move($imgFolder, $imgFile);
+
+        $product = Product::find($id);
+        $product->foto = $imgFile;
+        $product->save();
+
+        return redirect('products')->with('status_sukses', 'Logo '.$product->name.' berhasil disimpan');
     }
 }

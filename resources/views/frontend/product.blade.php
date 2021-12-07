@@ -14,8 +14,8 @@
             @foreach($products as $product)
             <div class="col-xs-18 col-sm-6 col-md-3">
                 <div class="thumbnail">
-                    {{-- <img src="{{ $product->foto }}" alt=""> --}}
-                    <img src="" height="150" alt="">
+                    <img src="{{ asset('img/'. $product->foto) }}" width="247" height="165" alt="">
+                    {{-- <img src="" height="150" alt=""> --}}
                     <div class="caption">
                         <h4>{{ Str::limit($product->nama, 15) }}</h4>
                         <p>{{ Str::limit($product->deskripsi, 50) }}</p>
