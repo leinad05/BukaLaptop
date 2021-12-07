@@ -23,7 +23,7 @@ class TransactionPolicy
 
     public function access(User $user)
     {
-        return ($user->sebagai == 'employee' || $user->sebagai == 'owner'
+        return (($user->sebagai == 'employee' && $user->status =='active') || $user->sebagai == 'owner'
                 ? Response::allow() 
                 : Response::deny('Access denied.')
         );

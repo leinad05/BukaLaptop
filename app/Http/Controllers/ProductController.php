@@ -276,6 +276,6 @@ class ProductController extends Controller
         $product->foto = $imgFile;
         $product->save();
 
-        return redirect('products')->with('status_sukses', 'Logo '.$product->name.' berhasil disimpan');
+        return redirect('products')->with('status', 'Successfully Edit Image');
     }
 }
